@@ -9,11 +9,11 @@
 \school{\unibo}
 \programme{Corso di Laurea in Ingegneria e Scienze Informatiche}
 \title{Slime-Mold Aggregation}
-\author{Tosi Lorenzo}
+\author{Lorenzo Tosi}
 \date{\today}
 \subject{Programmazione Ad Oggetti}
-\supervisor{Prof. Viroli Mirko}
-\cosupervisor{Dott. Aguzzi Gianluca}
+\supervisor{Prof. Mirko Viroli}
+\cosupervisor{Dott. Gianluca Aguzzi}
 \session{IV}
 \academicyear{2022-2023}
 
@@ -53,46 +53,132 @@ Optional. Max 1 page.
 \label{chap:introduzione}
 %----------------------------------------------------------------------------------------
 
-Write your intro here.
-\sidenote{Add sidenotes in this way. They are named after the author of the thesis}
+In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, slime-mold) rappresenta
+comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
+Lo slime mold, o muffa mucillaginosa è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un organismo multicellulare. 
+Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
+La particolarità principale della muffa mucillaginosa è che può muoversi come un organismo unicellulare o multicellulare a seconda delle diverse 
+condizioni ambientali in cui si trova.
+L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
+Quando trova una fonte di cibo, lo slime-mold si aggrega, formando una massa citoplasmatica detta plasmodio, composta da un grand numero cellule. Inoltre,
+questa massa può muoversi, "navigando" attraverso il terreno in cerca di cibo.
+Quando le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo slime mold può assumere forme diverse: può formare spore, 
+resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
+che si comporta come un'unica entità, condividendone di conseguenza risorse e compiti.
 
-You can use acronyms that your defined previously,
-such as \ac{IoT}.
+Perché è interessante simularlo?
+
+L'obiettivo di questa tesi è esplorare il fenomeno dell'aggregazione di questi organismi, sviluppando un sistema software che 
+si interfacci ed utilizzi a pieno tutti gli elementi chiave del simulatore Alchemist. Quest'ultimo, infatti, permette di riprodurre eventi appartenenti 
+a domini estremamente differenti tra loro, come simulazioni chimiche o il comportamento di pedoni in diverse situazioni.
+
+
+% \sidenote{Add sidenotes in this way. They are named after the author of the thesis}
+%You can use acronyms that your defined previously,
+%such as \ac{IoT}.
 %
-If you use acronyms twice,
-they will be written in full only once
-(indeed, you can mention the \ac{IoT} now without it being fully explained).
+%If you use acronyms twice,
+%they will be written in full only once
+%(indeed, you can mention the \ac{IoT} now without it being fully explained).
 %
-In some cases, you may need a plural form of the acronym.
+%In some cases, you may need a plural form of the acronym.
 %
-For instance,
-that you are discussing \acp{vm},
-you may need both \ac{vm} and \acp{vm}.
+%For instance,
+%that you are discussing \acp{vm},
+%you may need both \ac{vm} and \acp{vm}.
 
 \paragraph{Structure of the Thesis}
 
 \note{At the end, describe the structure of the paper}
 
-\chapter{State of the art}
+\chapter{Contesto}
 
-I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
+%I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
 
+%\begin{figure}
+    %\centering
+    %\includegraphics[width=.8\linewidth]{figures/random-image.pdf}
+    %\caption{Some random image}
+    %\label{fig:random-image}
+%\end{figure}
+\section{Simulazione}
+\subsection{Alchemist}
+Alchemist \cite{Pianini_2013} è un simulatore DES (Discrete Event System) che estende il modello computazionale 
+base delle reazioni chimiche in modo tale da favorirne l’applicabilità a situazioni complesse,
+pur mantenendo elevate prestazioni. In particolare, Alchemist si fonda su una versione ottimizzata 
+dell’algoritmo di Gillespie\cite{gillespie1977exact} chiamata Next Reaction Method\cite{gibson2000efficient}, esteso in modo tale da poter lavorare 
+con un ambiente mobile e dinamico dove sia possibile aggiungere o rimuovere reazioni, dati e
+connessioni topologiche. Le applicazioni già implementate sono varie e comprendono, ad esempio, 
+simulazioni di reazioni biochimiche e movimento di pedoni. Il punto di forza del sistema è il 
+meta-modello estremamente astratto, la cui effettiva realizzazione è demandata alle "incarnazioni",
+le quali rappresentano l’implementazione vera e propria delle diverse categorie di simulazioni 
+eseguibili all’interno. Attualmente troviamo 4 incarnazioni: 
+\begin{itemize}
+    \item Protelis
+    \item SAPERE
+    \item Biochemistry
+    \item Scafi
+\end{itemize}
+\subsection{Il meta-modello}
+
+Come accennato in precedenza, il meta-modello è uno dei punti di forza maggiori del simulatore. 
+Per meta-modello si intende un tipo di paradigma che descrive la struttura, le regole e le relazioni
+che i modelli di dati devono seguire all’interno di un sistema. Rappresenta in modo astratto i 
+concetti e le relazioni all’interno del dominio di interesse e stabilisce i vincoli e le convenzioni
+che tutti i modelli devono usare. Dunque, tutte le incarnazioni presenti presentano le stesse entità
+base. Poichè Alchemist è sviluppato partendo da un’ispirazione orientata sulla chimica/biochimica,
+le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
+\begin{itemize}
+    \item \textbf{Molecole} (molecule): il nome di un dato, concettualmente può essere interpretato come il nome di una variabile.
+    \item \textbf{Concentrazioni} (concentration): il valore associato alla molecola.
+    \item \textbf{Nodi} (node): un “contenitore” di molecole e reazioni.
+    \item \textbf{Ambiente} (environment): l’astrazione dello spazio; è un “contenitore” di nodi e svolge i seguenti compiti:
+    \begin{itemize}
+        \item Restituire la posizione dei nodi.
+        \item Restituire la distanza tra due nodi.
+        \item Supportare il movimento dei nodi, se presente.
+    \end{itemize}
+    \item \textbf{Regola di collegamento} (linking rule): una funzione relativa allo stato corrente dell’ambiente che associa ad ogni nodo un vicinato.
+    \item \textbf{Vicinato} (neighborhood): un entità composta da un nodo centrale e un insieme di nodi vicini.
+    \item \textbf{Reazione} (reaction): un qualsiasi evento che provoca un cambiamento dello stato dell’ambiente. È definita da una lista di condizioni, una o più lista di azioni e una distribuzione temporale. La frequenza con la quale avviene una reazione dipende da:
+    \begin{itemize}
+        \item Un parametro statico “rate”.
+        \item Il valore di ogni condizione.
+        \item Una “rate equation”, ovvero una equazione che combina il parametro statico (rate) con i valori delle condizioni, restituendo un “instantaneous rate”.
+        \item Una distribuzione temporale.
+    \end{itemize}
+    \item \textbf{Condizione} (condition): una funzione che, dato lo stato attuale del’ambiente (environment), restituisce un booleano ed un numero. Se il booleano è falso la reazione non può avvenire. In caso contrario, invece, avviene. Il numero può invece influenzare la velocità della reazione a seconda della reazione e della distribuzione temporale.
+    \item \textbf{Azione} (action): un cambiamento nell’ambiente.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/alchemistReaction.png}
+    \caption{Rappresentazione di una reazione in Alchemist}
+    \label{fig:reactionAlchemist}
+\end{figure}
 \begin{figure}
     \centering
-    \includegraphics[width=.8\linewidth]{figures/random-image.pdf}
-    \caption{Some random image}
-    \label{fig:random-image}
+    \includegraphics[width=.8\linewidth]{figures/alchemistModel.png}
+    \caption{Il modello di alchemist}
+    \label{fig:rmodelAlchemist}
 \end{figure}
 
-\section{Some cool topic}
+\chapter{Design}
+\section{Layer}
+Alchemist mette a disposizione 
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{figures/pheromoneLayer.jpeg}
+    \caption{Struttura PheromoneLayer}
+    \label{fig:phLayer}
+\end{figure}
+%You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
 
-\chapter{Contribution}
+%\lstinputlisting[float,language=Java,label={lst:random-code}]{listings/HelloWorld.java}
 
-You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
+\chapter{Implementazione}
 
-\lstinputlisting[float,language=Java,label={lst:random-code}]{listings/HelloWorld.java}
-
-\section{Fancy formulas here}
 
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY

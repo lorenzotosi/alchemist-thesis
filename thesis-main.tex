@@ -188,18 +188,20 @@ le caratteristiche e i requisiti che la simualzione dovrà avere:
     \item Il movimento deve seguire delle regole ben precise.
 \end{itemize}
 \section{Layer}
-Pensiamo alla nostra simulazione come se fosse un mondo, una città, complessa
-e ricca di informazioni. Ci interessa capire il livello di inquinamento di questa città, qualcosa di invisibile
-all'occhio umano ma comunque presente nell'ambiente, oppure la temperatura nelle varie aree cittadine. Abbiamo bisogno
+Si pensi alla simulazione come se fosse un mondo, una città, complessa
+e ricca di informazioni. E' di interesse capire il livello di inquinamento di questa città, qualcosa di invisibile
+all'occhio umano ma comunque presente nell'ambiente, oppure la temperatura nelle varie aree cittadine. Si ha bisogno
 di "inserire" nel nostro ambiente degli "strati" invisibili che hanno il compito di raccogliere queste informazioni.
 E' possibile in Alchemist definire questi "strati" di dati, chiamati Layer.
 \newline
 Nel contesto di questo progetto è stato necessario l'utilizzo di un Layer che avesse la funzione di "rete di raccolta" 
-dei feromoni che, nella simulazione di riferimento \ref{refSim}, venivano rilasciati dalle tartarughe.
+dei feromoni che, nella simulazione di riferimento \ref{refSim}, venivano rilasciati dalle tartarughe nelle varie posizioni.
+Un aspetto di particolare rilevanza è stato il processo decisionale relativo alla gestione delle posizioni collegate 
+al deposito del feromone. In alchemist non è presente di "spazio", le posizioni sono puntiformi 
 
 
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includegraphics[width=.8\linewidth]{figures/pheromoneLayer.jpeg}
     \caption{Struttura PheromoneLayer}

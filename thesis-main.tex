@@ -53,20 +53,35 @@ Optional. Max 1 page.
 \label{chap:introduzione}
 %----------------------------------------------------------------------------------------
 
-In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, slime-mold) rappresenta
-comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
-Lo slime mold, o muffa mucillaginosa è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un organismo multicellulare. 
-Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
-La particolarità principale della muffa mucillaginosa è che può muoversi come un organismo unicellulare o multicellulare a seconda delle diverse 
-condizioni ambientali in cui si trova.
-L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
-Quando trova una fonte di cibo, lo slime-mold si aggrega, formando una massa citoplasmatica detta plasmodio, composta da un grand numero cellule. Inoltre,
-questa massa può muoversi, "navigando" attraverso il terreno in cerca di cibo.
-Quando le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo slime mold può assumere forme diverse: può formare spore, 
-resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
-che si comporta come un'unica entità, condividendone di conseguenza risorse e compiti.
+Nel vasto campo della ricerca scientifica, i comportamenti complessi emergenti sono oggetto di 
+crescente interesse e studio. Questi fenomeni rappresentano il manifestarsi di 
+comportamenti collettivi che sorgono dall'interazione dinamica e non lineare di 
+molteplici componenti di un sistema, difficilmente anticipabili in base alle leggi che manovrano le 
+singole parti.
 
-Perché è interessante simularlo?
+In natura questi comportamenti sono ubiqui e possono essere osservati in tantissimi ambiti, dal regno 
+animale, dove possiamo trovare per esempio la forma e il comportamento di uno stormo di uccelli o di un branco di pesci, 
+al comportamento dell'uomo osservato durante il traffico nelle città, dal mercato della borsa valori al gioco del poker.
+
+Un esempio significativo è quello osservato in biologia in una colonia di formiche. Nonostante manchi
+una struttura centralizzata e le formiche seguono regole di comportamento semplici e locali, 
+l'interazione tra di esse dà origine ad una "comunità" e di conseguenza a modelli complessi di ricerca del cibo, 
+di costruzione di nidi e di difesa del territorio.
+Ogni formica reagisce a stimoli, sotto forme di tracce chimiche, che provengono da altre formiche
+e a sua volta influenza i suoi simili lasciando dietro una traccia chimica.
+Questo fenomeno è simile ad altre strutture emergenti presenti in natura e riscontrate sia negli "insetti sociali",
+ovvero insetti che formano colonie con mansioni diversificate, o in generale in animali che vivono in gruppo 
+(pesci, tartarughe, mandrie di mammiferi,...) e sono tutti basati principalmente su feromoni o odori chimici.
+
+%Perché è interessante la simulazione di questi comportamenti?
+La simulazione di questi fenomeni è estremamente importante per diversi motivi:
+\begin{itemize}
+    \item Comprenderne la complessità: I fenomeni complessi sono caratterizzati da interazioni dinamiche tra
+    i suoi comonenti che spesso sono imprevedibili. La simulazione è una risorsa chiave per esplorare, studiare e comprendere 
+    moltissimi aspetti di queste dinamiche e permette di osservare le interazioni dei diversi elementi in infiniti modi.
+    \item Predire il comportamento del sistema: la simulazione può essere eseguita per cercare di prevedere e comprendere il comportamento
+    futuro di un sistema emergente in modo tale da poter prendere delle decisioni informate.
+\end{itemize}
 
 L'obiettivo di questa tesi è esplorare il fenomeno dell'aggregazione di questi organismi, sviluppando un sistema software che 
 si interfacci ed utilizzi a pieno tutti gli elementi chiave del simulatore Alchemist. Quest'ultimo, infatti, permette di riprodurre eventi appartenenti 
@@ -158,7 +173,7 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
 \end{figure}
 \clearpage
 
-\section{Simulazione di riferimento}\label{refSim}
+\section{Simulazione di riferimento} \label{refSim}
 La simulazione utilizzata come riferimento per questo progetto di tesi è presente nella libreria
 di modelli di NetLogo\cite{wilensky1997netlogo}. Il modello di riferimento è "Slime"\cite{wilensky1997netlogo}
 e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
@@ -169,10 +184,21 @@ tartaruga si sposterà nella posizione "annusata", in caso contrario la tartarug
 Durante tutto ciò, le patches diffonderanno del "feromone" alle varie posizioni vicine e con il passare del tempo 
 il "feromone" evaporerà dalla griglia.
 
-\section{Java e la programmazione ad oggetti}
+\section{Overview su slime mold}
+In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, slime-mold) rappresenta
+comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
+Lo slime mold, o muffa mucillaginosa è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un organismo multicellulare. 
+Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
+La particolarità principale della muffa mucillaginosa è che può muoversi come un organismo unicellulare o multicellulare a seconda delle diverse 
+condizioni ambientali in cui si trova.
+L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
+Quando trova una fonte di cibo, lo slime-mold si aggrega, formando una massa citoplasmatica detta plasmodio, composta da un grand numero cellule. Inoltre,
+questa massa può muoversi, "navigando" attraverso il terreno in cerca di cibo.
+Quando le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo slime mold può assumere forme diverse: può formare spore, 
+resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
+che si comporta come un'unica entità, condividendone di conseguenza risorse e compiti.
 
-
-\chapter{Design}
+\chapter{Analisi}
 \section{Requisiti}
 Analizzando il modello presente su NetLogo\cite{wilensky1997netlogo}, possiamo individuare 
 le caratteristiche e i requisiti che la simualzione dovrà avere:
@@ -187,6 +213,8 @@ le caratteristiche e i requisiti che la simualzione dovrà avere:
     \item Le entità dovranno avere un concetto di direzione.
     \item Il movimento deve seguire delle regole ben precise.
 \end{itemize}
+\chapter{Design}
+
 \section{Layer}
 Si pensi alla simulazione come se fosse un micro mondo, una "città", complessa
 e ricca di informazioni. È di interesse capire il livello di inquinamento di questa città, qualcosa di invisibile
@@ -213,7 +241,8 @@ al deposito del feromone. In alchemist non è presente di "spazio", le posizioni
 
 \chapter{Implementazione}
 
-
+\chapter{Evaluation}
+\chapter{Conclusioni e ringraziamenti}
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------

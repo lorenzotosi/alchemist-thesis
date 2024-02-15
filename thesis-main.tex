@@ -178,10 +178,11 @@ La simulazione utilizzata come riferimento per questo progetto di tesi è presen
 di modelli di NetLogo\cite{wilensky1997netlogo}. Il modello di riferimento è "Slime"\cite{wilensky1997netlogo}
 e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
 Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
-chiamata "feromone" che si deposita in una posizione precisa, chiamata "patch". La tartaruga per muoversi 
+chiamata "feromone" che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
+in tantissime "micro-aree" chiamate "patch". La tartaruga per muoversi 
 "annusa" davanti a se, ovverro percepisce se nelle patch vicine è presente del "feromone". Se questo è abbastanza alto, la 
 tartaruga si sposterà nella posizione "annusata", in caso contrario la tartaruga si muoverà randomicamente. 
-Durante tutto ciò, le patches diffonderanno del "feromone" alle varie posizioni vicine e con il passare del tempo 
+Durante tutto ciò, le "patches" diffonderanno del "feromone" alle varie posizioni vicine e con il passare del tempo 
 il "feromone" evaporerà dalla griglia.
 
 \section{Overview su slime mold}
@@ -223,9 +224,21 @@ di "inserire" nell'ambiente degli "strati" invisibili che hanno il compito di ra
 È possibile in Alchemist definire questi "strati" di dati, chiamati Layer.
 \newline
 Nel contesto di questo progetto è stato necessario l'utilizzo di un Layer che avesse la funzione di "rete di raccolta" 
-dei feromoni che, nella simulazione di riferimento \ref{refSim}, venivano rilasciati dalle tartarughe nelle varie posizioni.
+dei feromoni che, nella simulazione di riferimento \ref{refSim}, venivano rilasciati dalle tartarughe nelle varie posizioni
+dello spazio. 
+Il layer, chiamato \textit{PheromoneLayer} avrà come compiti:
+\begin{itemize}
+    \item Implementare una struttura dati per tenere traccia della quantità di feromone presente in ogni posizione.
+    \item Offrire un modo per aggiornare i valori del feromone.
+    \item Condividere con le altre classi la struttura dati contenente la quantità di feromone per posizione.
+    \item Lasciare la possibilità all'utente di decidere le dimensioni dell'area totale e di quella di ognuna patch.
+\end{itemize}
+\subsection{Le posizioni}
 Un aspetto di particolare rilevanza è stato il processo decisionale relativo alla gestione delle posizioni collegate 
-al deposito del feromone. In alchemist non è presente di "spazio", le posizioni sono puntiformi
+al deposito del feromone. Nella simulazione di riferimento troviamo uno spazio a griglia, dove l'area totale è suddivisa
+in "micro-aree" chiamate "patch". In alchemist non è presente il concetto di "area" o "spazio", necessario per individuare una patch,
+in quanto le posizioni sono puntiformi e non necessariamente intere. Il layer implementa un sistema che converte la posizione puntiforme
+del Simulatore in una posizione, a sua volta puntiforme, ma che simbolizza l'angolo sinistro inferiore di un quadrato.
 
 
 

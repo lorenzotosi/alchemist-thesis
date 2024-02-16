@@ -105,7 +105,7 @@ a domini estremamente differenti tra loro, come simulazioni chimiche o il compor
 \note{At the end, describe the structure of the paper}
 
 \chapter{Contesto}
-In questo capitolo vengono spiegate le tecnologie adottate. %TODO
+%In questo capitolo vengono spiegate le tecnologie adottate. %TODO
 %I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
 
 \section{Alchemist}
@@ -179,7 +179,12 @@ in tantissime ``micro-aree'' chiamate \textit{patch}. La tartaruga per muoversi
 tartaruga si sposterà nella posizione ``annusata'', mentre, in caso contrario la tartaruga si muoverà in modo randomico nello spazio circostante. 
 Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
 il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
-
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/patch.png}
+    \caption{Il mondo suddiviso in patch}\label{fig:patch}
+\end{figure}
+\clearpage
 \section{Overview su \textit{slime-mold}}
 Nel contesto della presente tesi, sulla base della simulazione di riferimento\ref{refSim} e i comportamenti osservati in essa, si è scelto di indagare un altro 
 fenomeno dalle caratteristiche estremamente simili: la muffa mucillaginosa.
@@ -245,7 +250,7 @@ Entrambe le misure, ovvero quella della griglia e quella della \textit{patch} so
     \includegraphics[width=.8\linewidth]{figures/pheromoneLayer.jpeg}
     \caption{Struttura PheromoneLayer}\label{fig:phLayer}
 \end{figure}
-
+\newpage
 \section{Global Reaction}
 %You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
 

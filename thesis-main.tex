@@ -125,7 +125,7 @@ eseguibili all'interno. Attualmente troviamo 4 incarnazioni:
     \item Biochemistry
     \item Scafi
 \end{itemize}
-\subsection{Il meta-modello}
+\subsection{Il meta-modello} 
 Come accennato in precedenza, il meta-modello è uno dei punti di forza maggiori di Alchemist. 
 Per meta-modello si intende un tipo di paradigma che descrive la struttura, le regole e le relazioni
 che i modelli di dati devono seguire all'interno di un sistema. Rappresenta in modo astratto i 
@@ -136,7 +136,7 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
 \begin{itemize}
     \item \textbf{Molecole} (\textit{molecule}): il nome di un dato, concettualmente interpretabile come il nome di una variabile.
     \item \textbf{Concentrazioni} (\textit{concentration}): il valore associato alla molecola.
-    \item \textbf{Nodi} (\textit{node}): il ``contenitore'' di molecole e reazioni.
+    \item \textbf{Nodi} \label{node} (\textit{node}): il ``contenitore'' di molecole e reazioni.
     \item \textbf{Ambiente} (\textit{environment}): l'astrazione dello spazio; è un “contenitore” di nodi e svolge i seguenti compiti:
     \begin{itemize}
         \item Restituire la posizione dei nodi.
@@ -250,8 +250,49 @@ Entrambe le misure, ovvero quella della griglia e quella della \textit{patch} so
     \includegraphics[width=.8\linewidth]{figures/pheromoneLayer.jpeg}
     \caption{Struttura PheromoneLayer}\label{fig:phLayer}
 \end{figure}
-\newpage
-\section{Global Reaction}
+
+\clearpage
+\section{Le entità}
+Una volta definito l'ambiente di simulazione è importante determinare la struttura e la logica delle 
+entità che lo abiteranno. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le tartarughe
+che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Concettualmente quindi, la tartaruga è un contenitore infinito di 
+``feromoni'' che, muovendosi, ne rilascia una parte nell'ambiente. Alchemist possiede la nozione di nodo\space\ref{node} che per definizione
+è un contenitore di molecole che vive in un ambiente. È stato quindi necessario solamente definire la tipologia di molecola
+appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del mondo reale) in Alchemist.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\linewidth]{figures/nodes.png}
+    \caption{Rappresentazione grafica dove ogni punto è un nodo}\label{fig:nodes}
+\end{figure}
+\clearpage
+\section{Il movimento}
+\section{Reazioni globali}
+La Reazione Globale o \textit{Global Reaction} rappresenta uno strumento fondamentale per descrivere
+le interazioni e i processi che avvengono all'interno di un sistema simulato.
+Possono essere utilizzate per modellare una vasta gamma di fenomeni, dalla diffusione chimica alla dinamica dei sistemi biologici.
+Contrariamente alle reazioni locali, le \textit{Global Reaction} considerano l'intero contesto del sistema durante la 
+simulazione, permettendo una modellazione più precisa e realistica del fenomeno d'oggetto di esame. 
+Nell'ambito di questo programma si individuano 3 reazioni, tutte collegate al feromone:
+\begin{itemize}
+    \item Rilascio (\textit{Deposit})
+    \item Evaporazione (\textit{Evaporation})
+    \item Diffusione (\textit{Diffusion})
+\end{itemize}
+\subsection{Rilascio}
+Questa reazione coinvolge in modo diretto il nodo, l'ambiente e il layer. Durante ogni movimento il nodo rilascia 
+nell'ambiente una quantità di feromone in una posizione discreta. Il layer si occupa della raccolta del feromone,
+posizionandolo in una \textit{patch} ed incrementando il valore della sostanza collegato a questa.
+\subsection{Evaporazione}
+L'evaporazione riguarda solamente il layer. In natura, con il passare del tempo la traccia chimica diventa sempre più
+lieve finchè sparisce completamente. Questa reazione si occupa esattamente di questo: ogni \textit{patch} caratterizzata
+dalla presenza di un livello di feromone positivo viene individuata e il valore collegato decrementato.
+\subsection{Diffusione}
+La diffusione del feromone è un evento che caratterizza in modo diretto il layer e i nodi. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=.7\linewidth]{figures/diffusione.png}
+    \caption{Diffusione grafica del feromone}\label{fig:diffusion}
+\end{figure}
 %You may also put some code snippet (which is NOT float by default), eg: \cref{lst:random-code}.
 
 %\lstinputlisting[float,language=Java,label={lst:random-code}]{listings/HelloWorld.java}

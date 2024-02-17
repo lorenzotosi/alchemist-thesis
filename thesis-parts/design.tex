@@ -45,6 +45,15 @@ appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del
     \includegraphics[width=.7\linewidth]{figures/nodes.png}
     \caption{Rappresentazione grafica dove ogni punto è un nodo}\label{fig:nodes}
 \end{figure}
+\subsection{Direzioni}
+Un aspetto importante da considerare è la direzione del movimento delle tartarughe. Nella simulazione di riferimento\space\ref{refSim} le tartarughe
+si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle tartarughe,
+è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con delle direzioni facilmente accessibili 
+e modificabili in base alle esigenze.
+
+Alchemist rende possibile la definizione di attributi personalizzati per i nodi, chiamati \textit{Node Property}. Il corretto utilizzo di questa
+funzionalità ha permesso di definire un attributo di tipo \textit{Direction} per ogni nodo che rappresentasse la direzione 
+in modo tale da poter simulare in modo realistico questo aspetto della simulazione.
 \clearpage
 \section{Il movimento}
 

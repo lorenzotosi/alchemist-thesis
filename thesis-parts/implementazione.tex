@@ -9,8 +9,10 @@ La struttura del progetto, organizzato in package, è la seguente:
 \end{itemize}
 
 \section{Layer}
-Il \textit{PheromoneLayer}, layer personalizzato della simulazione, è stato implementato come una interfaccia che estende \texttt{Layer}, 
-interfaccia propria di Alchemist.  I metodi che sono definiti sono:
+Il \textit{PheromoneLayer<P extends Position2D<P>>}, layer personalizzato della simulazione, è stato implementato 
+come una interfaccia che estende \texttt{Layer}, 
+interfaccia propria di Alchemist. L'utilizzo del parametro \texttt{P} 
+I metodi che sono definiti sono:
 \begin{itemize}
     \item \texttt{void evaporate(P position, Double value)}: metodo che permette di far evaporare il feromone. 
     Richiede in input la posizione e il valore del feromone.
@@ -18,7 +20,7 @@ interfaccia propria di Alchemist.  I metodi che sono definiti sono:
      Richiede in input la posizione e il valore del feromone.
     \item \texttt{Rectangle getLayerBounds()}: metodo che restituisce un oggetto di tipo \texttt{Rectangle}.
 \end{itemize}
-
+devo parlare della Mappa e delle posizioni, di come vengono convertite magari aggiungendo delle foto.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{figures/pheromoneLayer.png}

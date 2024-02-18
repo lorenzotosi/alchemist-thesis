@@ -2,11 +2,15 @@
 \section{Struttura del progetto}
 La struttura del progetto, organizzato in package, è la seguente:
 \begin{itemize}
-    \item \textbf{Actions}: le azioni della simulazione.
-    \item \textbf{GlobalActions}: le azioni globali della simulazione.
     \item \textbf{Layer}: il layer personalizzato della simulazione.
+    \item \textbf{Actions}: le azioni della simulazione.
+    \item \textbf{GlobalReactions}: le azioni globali della simulazione.
     \item \textbf{NodeProperty}: le proprietà dei nodi della simulazione.
 \end{itemize}
+Per avviare il progetto in Alchemist, è necessario configurare accuratamente i parametri
+e le opzioni desiderate attraverso un file di configurazione YAML\@. Questo file fornisce
+le istruzioni necessarie per definire il comportamento del simulatore, specificare
+i componenti del sistema e regolare le interazioni tra di essi.
 \clearpage
 \section{Layer}
 \begin{figure}[ht]
@@ -40,6 +44,7 @@ Esegue quindi un arrotondamento per eccesso o per difetto, in modo tale da otten
     startX e startY hanno come valore 0, width e height 1 e step 0.5}\label{fig:patch-nodi}
 \end{figure}
 %devo parlare della Mappa e delle posizioni, di come vengono convertite magari aggiungendo delle foto.
+\clearpage
 \subsection{Struttura dati}
 Un aspetto di fondamentale importanza riguarda la struttura dati utilizzata per la gestione del feromone.
 Per ovviare alla mancanza del concetto di area, è stato utilizzato un \texttt{HashMap<P, Double>} che associa ad ogni posizione \texttt{P} un valore \texttt{Double} di feromone.
@@ -55,5 +60,80 @@ I metodi definiti nell'interfaccia e implementati nella classe sono:
      Richiede in input la posizione e il valore del feromone.
     \item \texttt{Rectangle getLayerBounds()}: metodo che restituisce un oggetto di tipo \texttt{Rectangle}.
 \end{itemize}
+Di rilevante importanza sono i primi due metodi: \texttt{evaporate} e \texttt{deposit}.
+Entrambi sono nominati come le reazioni globali della simulazione e vengono utilizzati dalle stesse per accedere la mappa e modificare il feromone.
+\lstinputlisting[language=Java,label={lst:phlayer}]{listings/layer.java}
 
+\section{Actions}
+In questa sezione verranno descritte le azioni della simulazione. Possiamo trovare:
+\begin{itemize}
+    \item \texttt{MoveNode}: azione che permette di far muovere ogni singolo nodo.
+    \item \texttt{NodeInfo}: azione che permette di osservare le informazioni di ogni singolo nodo.
+\end{itemize}
 
+\subsection{MoveNode}
+La classe \texttt{MoveNode<P extends Position<P> \& Position2D<P>>} incorpora l'intera logica che permette il movimento di ogni singolo nodo. 
+Per la sua creazione è necessario che l'utente definisca i seguenti parametri:
+\begin{itemize}
+    \item \texttt{sniffThreshold}: la soglia di feromone che il nodo deve percepire per potersi muovere.
+    \item \texttt{sniffDistance}: la distanza del passo di movimento.
+    \item \texttt{wiggleBias}: la tendenza a preferire un movimento casuale oscillatorio in una direzione specifica.
+\end{itemize}
+Il parametro \texttt{wiggleBias} può essere deciso in 3 modi:
+\begin{itemize}
+    \item \texttt{0}: il nodo ha il 50\% di muoversi in avanti e il 25\% di muoversi a destra o sinistra.
+    \item \texttt{0 > x <=40}: il nodo tende a preferire la direzione di sinistra; il valore indica la probabilità di muoversi in quel verso.
+     40 indica il 100\% di probabilità di muoversi in quella direzione.
+    \item \texttt{-40 > x < 0}: il nodo tende a preferire la direzione di destra; il valore indica la probabilità di muoversi in quel verso.
+    -40 indica il 100\% di probabilità di muoversi in quella direzione.
+\end{itemize}
+Questa classe estende la classe astratta \texttt{AbstractAction<T>}, originale di Alchemist, implementandone i metodi astratti.
+Tra questi, il metodo \texttt{execute} è il più importante, in quanto si occupa di eseguire l'azione vera e propria.
+La logica di movimento segue questi passi:
+\begin{enumerate}
+    \item Viene individuata la posizione attuale del nodo.
+    \item Questa posizione viene adattata alla \textit{patch} più vicina.
+    \item Vengono calcolate le direzioni possibili in base alle patch adiacenti alla posizione calcolata precedentemente che hanno una 
+    concentrazione di feromone superiore a una soglia definita dall'utente
+    (\texttt{sniffThreshold}).
+    \item Viene identificata la \textit{patch} con la maggiore concentrazione di feromone. Questa però non è sempre presente;
+    \item Se la \textit{patch} è presente:
+    \begin{enumerate}
+        \item La direzione del nodo viene aggiornata in base alla direzione della \textit{patch} con la maggiore concentrazione di feromone.
+        \item Il nodo si muove in quella direzione e si aggiorna la direzione del nodo.
+    \end{enumerate}
+    \item Se la \textit{patch} non è presente:
+    \begin{enumerate}
+        \item Viene calcolata una direzione casuale tra quelle possibili tenendo in considerazione la direzione attuale del nodo.
+        \item Il nodo si muove in quella direzione e si aggiorna la direzione del nodo.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{NodeInfo}
+La classe \texttt{NodeInfo<T, P extends Position<P> \& Position2D<P>>} permette di osservare le informazioni di ogni singolo nodo. Anche questa
+classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i metodi astratti. Le informazioni osservabili sono le seguenti:
+\begin{itemize}
+    \item \texttt{PheromoneValue}: la concentrazione di feromone nella \textit{patch} in cui si trova il nodo.
+    \item \texttt{direction}: la direzione attuale del nodo.
+    \item \texttt{pheromone}: la quantità di feromone che il nodo rilascia.
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.7\linewidth]{figures/nodeinfo.jpg}
+    \caption{Le informazioni del nodo. Si possono osservare nella sezione ``Content''}\label{fig:nodeinfo}
+\end{figure}
+\clearpage
+
+\section{GlobalReactions}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.7\linewidth]{figures/global.png}
+    \caption{Schema delle Global Reaction }\label{fig:global}
+\end{figure}
+In questa sezione verranno descritte le azioni globali della simulazione. Possiamo trovare:
+\begin{itemize}
+    \item \texttt{Evaporate}: azione che permette di far evaporare il feromone.
+    \item \texttt{Deposit}: azione che permette di far diffondere il feromone.
+    \item \texttt{Diffuse}: azione che diffonde il feromone nelle patch adiacenti.
+\end{itemize}

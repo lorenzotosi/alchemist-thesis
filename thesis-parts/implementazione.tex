@@ -45,7 +45,7 @@ Il \texttt{PheromoneLayer} esegue, quindi, un arrotondamento per eccesso o per d
     startX e startY hanno come valore 0, width e height 1 e step 0.5}\label{fig:patch-nodi}
 \end{figure}
 %devo parlare della Mappa e delle posizioni, di come vengono convertite magari aggiungendo delle foto.
-\clearpage
+
 \subsection{Struttura dati}
 Un aspetto di fondamentale importanza riguarda la struttura dati utilizzata per la gestione del feromone.
 Per ovviare alla mancanza del concetto di area, è stato utilizzato un \texttt{HashMap<P, Double>} che associa ad ogni posizione \texttt{P} un valore \texttt{Double} di feromone.
@@ -128,7 +128,6 @@ classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i 
     \includegraphics[width=.7\linewidth]{figures/nodeinfo.jpg}
     \caption{Le informazioni del nodo. Si possono osservare nella sezione ``Content''}\label{fig:nodeinfo}
 \end{figure}
-\clearpage
 
 \section{GlobalReactions}
 \begin{figure}[ht]

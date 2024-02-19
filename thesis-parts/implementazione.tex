@@ -74,7 +74,7 @@ In questa sezione vengono descritte le azioni della simulazione. Possiamo trovar
     \item \texttt{NodeInfo}: azione che permette di controllare le informazioni di ogni singolo nodo.
 \end{itemize}
 
-\subsection{MoveNode}
+\subsection{MoveNode}\label{moveNode}
 La classe \texttt{MoveNode<P extends Position<P> \& Position2D<P>>} incorpora l'intera logica che permette il movimento di ogni singolo nodo. 
 Per la sua creazione è necessario che l'utente definisca i seguenti parametri:
 \begin{itemize}
@@ -142,31 +142,32 @@ In questa sezione del progetto sono state implementate le reazioni globali della
     \item \texttt{Deposit}: azione che permette di far diffondere il feromone.
     \item \texttt{Diffuse}: azione che diffonde il feromone nelle \textit{patch} adiacenti.
 \end{itemize}
-Le classi soprastanti estendono la classe astratta \texttt{AbstractGlobalReaction<T, P extends Position<P> \& Position2D<P>>},
-la quale implementa l'interfaccia \texttt{PheromoneGlobalReaction<T, P>}. Quest'ultima estende l'interfaccia 
+Le classi sopra introdotte estendono la classe astratta \texttt{AbstractGlobalReaction<T, P extends Position<P>}
+\& \texttt{Position2D<P>}
+la quale implementa l'interfaccia \newline\texttt{PheromoneGlobalReaction<T, P>}. Quest'ultima estende l'interfaccia 
 propria di Alchemist \texttt{GlobalReaction<T>} dove sono definite le operazioni da implementare in modo tale che il 
-simulatore possa identificare ed utilizzare in modo corretto tutti i sorgenti che la implementino.
+simulatore possa identificare ed utilizzare in modo corretto tutti i sorgenti necessari.
 L'interfaccia \texttt{PheromoneGlobalReaction<T, P>} definisce il metodo \texttt{action(PheromoneLayerImpl<P> phLayer)}.
-Questo metodo è implementato in ogni classe e si occupa di eseguire la logica della reazione.
+Quest'ultimo è implementato in ogni classe e si occupa di eseguire la logica della reazione.
 Si è scelta questa struttura in quanto i metodi definiti dall'interfaccia \texttt{GlobalReaction<T>}
 sono i medesimi per ogni azione globale e quindi l'utilizzo della classe astratta \texttt{AbstractGlobalReaction},
-che li implementa permette di evitare la duplicazione del codice.
+che li implementa, permette di evitare la ripetizione inutile del codice.
 
-La simulazione esegue una volta al secondo le reazioni in modo tale da garantire un'evoluzione corretta del feromone nel tempo e 
-queste vengono eseguite nell'ordine in cui sono state definite nel file di configurazione YAML\@.
+La simulazione esegue una volta al secondo le reazioni in modo tale da garantire un'evoluzione corretta del feromone nel tempo. Inoltre, le reazioni
+in questione vengono eseguite nell'ordine in cui sono state definite nel file di configurazione YAML\@.
 \subsection{Evaporate}
 Questa classe ha il compito di fare evaporare il feromone dall'ambiente. L'azione di evaporazione è simulata
 attraverso la moltiplicazione del valore del feromone per un coefficente di evaporazione compreso tra 0 e 1, 
-definito dall'utente. Questo evento colpisce ogni singola \textit{patch} dove è presente il feromone.
-Per alterare il valore del feromone do ogni \textit{patch}, viene richiamato il metodo 
+definito dall'utente. Questo evento ha effetto su ogni singola \textit{patch} in cui è presente il feromone.
+Per alterare il valore del feromone di ogni \textit{patch}, viene richiamato il metodo 
 \texttt{evaporate} del \texttt{PheromoneLayer}\space\ref{layer}.
 \newline
 \lstinputlisting[language=Java,label={lst:evaporate}]{listings/evaporate.java}
 
 \subsection{Deposit}
-Il sorgente protagonista di questa sottosezione compie l'azione di depositare il feromone. Dall'ambiente
+Il sorgente protagonista di questa sotto-sezione compie l'azione di depositare il feromone. Dall'ambiente
 vengono individuate le posizioni di tutti i nodi e viene poi richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}
-per modificare il valore di feromone, associato alla posizione attuale del nodo, presente nella struttura dati\space\ref{strDati}.\newline
+per modificare il valore del feromone, associato alla posizione attuale del nodo, presente nella struttura dati\space\ref{strDati}.\newline
 \lstinputlisting[language=Java,label={lst:deposit}]{listings/deposit.java}
 
 \subsection{Diffuse}
@@ -174,8 +175,22 @@ Quest'ultima classe si occupa di diffondere il feromone nelle \textit{patch} adi
 le \textit{patch}, e per ognuna si calcola il suo vicinato. Se la \textit{patch} ha un valore di feromone superiore ad una soglia definita dall'utente,
 si procede a diffondere il feromone. La diffusione è emulata attraverso la moltiplicazione del valore del feromone
 per un coefficente di diffusione deciso dall'utente. Questa reazione, concettualmente, è simile alla \texttt{Deposit} in quanto
-nel vicinato di una \textit{patch} viene depositato del feromone, e per questo motivo viene richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}.
+nel vicinato di una \textit{patch} viene depositato del feromone, e per questo motivo, viene richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}.
 \newline
 \lstinputlisting[language=Java,label={lst:diffuse}]{listings/diffuse.java}
 
 \section{NodeProperty}
+La classe \texttt{DirectionProperty} è stata implementata per poter associare ad ogni nodo una proprietà che rispecchiasse la sua direzione attuale.
+Estende la classe \texttt{AbstractNodeProperty<T>} fornita dal set base di Alchemist.
+L'enum \texttt{Direction}, che definisce le direzioni possibili in cui un nodo può muoversi, è propedeutico all'utilizzo di questa classe.
+L'enum definisce i 4 punti cardinali e i loro punti intermedi. Infatti, un nodo può muoversi in 8 direzioni diverse e, tenere traccia di
+queste, è fondamentale per la corretta esecuzione della simulazione. L'enum, oltre a contenere le definizioni delle direzioni, contiene anche,
+per ognuna di esse, metodi che ne ritornano le coordinate x e y e le direzioni adiacenti. All'avvio del programma, ad ogni nodo 
+viene assegnata una direzione in modo randomico. 
+
+La \texttt{NodeProperty} è una proprietà fondamentale per il corretto funzionamento dell'azione \texttt{MoveNode}
+\space\ref{moveNode}; senza di essa, infatti, il movimento del nodo risulterebbe irrealistico in quanto si muoverebbe in modo completamente casuale.
+Con l'implementazione di questa classe e una logica di movimento (implementata nella classe \texttt{MoveNode}\space\ref{moveNode})
+pensata per sfruttare questa componente, invece,
+si osserva che il movimento di un singolo nodo risulta piuttosto ``armonioso'' e realistico, più simile a quello di un essere vivente che 
+esplora l'ambiente circostante.

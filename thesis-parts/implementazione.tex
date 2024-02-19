@@ -12,7 +12,7 @@ e le opzioni desiderate attraverso un file di configurazione YAML\@. Questo file
 le istruzioni necessarie per definire il comportamento del simulatore, specificare
 i componenti del sistema e regolare le interazioni tra di essi.
 \clearpage
-\section{Layer}
+\section{Layer}\label{layer}
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{figures/pheromoneLayer.png}
@@ -46,13 +46,13 @@ Il \texttt{PheromoneLayer} esegue, quindi, un arrotondamento per eccesso o per d
 \end{figure}
 %devo parlare della Mappa e delle posizioni, di come vengono convertite magari aggiungendo delle foto.
 
-\subsection{Struttura dati}
+\subsection{Struttura dati}\label{strDati}
 Un aspetto di fondamentale importanza riguarda la struttura dati utilizzata per la gestione del feromone.
 Per ovviare alla mancanza del concetto di area, è stato utilizzato un \texttt{HashMap<P, Double>} che associa ad ogni posizione \texttt{P} un valore \texttt{Double} di feromone.
 Questa mappa viene inizializzata nel costruttore della classe attraverso il metodo \texttt{setupEnviromnent()} che si occupa di popolare la mappa
 con tutte le possibili posizioni delle \textit{patch} e di inizializzare il feromone a 0.\newline
 
-\lstinputlisting[language=Java,label={lst:phlayer}]{listings/phlayersetup.java}
+\lstinputlisting[language=Java,label={lst:phlayer}]{listings/phlayerSetup.java}
 
 \subsection{Metodi}
 I metodi definiti nell'interfaccia e implementati nella classe sono:
@@ -65,7 +65,7 @@ I metodi definiti nell'interfaccia e implementati nella classe sono:
 \end{itemize}
 Di grande importanza sono i primi due metodi: \texttt{evaporate} e \texttt{deposit}.
 Entrambi sono nominati come le reazioni globali della simulazione e vengono utilizzati dalle stesse per accedere la mappa e modificare il feromone.\newline
-\lstinputlisting[language=Java,label={lst:phlayer}]{listings/layer.java}
+\lstinputlisting[language=Java,label={lst:phlayer}]{listings/phLayerDepositAndEvaporate.java}
 
 \section{Actions}
 In questa sezione vengono descritte le azioni della simulazione. Possiamo trovare:
@@ -128,6 +128,7 @@ classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i 
     \includegraphics[width=.7\linewidth]{figures/nodeinfo.jpg}
     \caption{Le informazioni del nodo. Si possono osservare nella sezione ``Content''}\label{fig:nodeinfo}
 \end{figure}
+\clearpage
 
 \section{GlobalReactions}
 \begin{figure}[ht]
@@ -135,9 +136,46 @@ classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i 
     \includegraphics[width=.7\linewidth]{figures/global.png}
     \caption{Schema delle Global Reaction }\label{fig:global}
 \end{figure}
-In questa sezione del progetto sono state implementate le azioni globali della simulazione. Possiamo trovare:
+In questa sezione del progetto sono state implementate le reazioni globali della simulazione. Possiamo trovare:
 \begin{itemize}
     \item \texttt{Evaporate}: azione che permette di far evaporare il feromone.
     \item \texttt{Deposit}: azione che permette di far diffondere il feromone.
-    \item \texttt{Diffuse}: azione che diffonde il feromone nelle patch adiacenti.
+    \item \texttt{Diffuse}: azione che diffonde il feromone nelle \textit{patch} adiacenti.
 \end{itemize}
+Le classi soprastanti estendono la classe astratta \texttt{AbstractGlobalReaction<T, P extends Position<P> \& Position2D<P>>},
+la quale implementa l'interfaccia \texttt{PheromoneGlobalReaction<T, P>}. Quest'ultima estende l'interfaccia 
+propria di Alchemist \texttt{GlobalReaction<T>} dove sono definite le operazioni da implementare in modo tale che il 
+simulatore possa identificare ed utilizzare in modo corretto tutti i sorgenti che la implementino.
+L'interfaccia \texttt{PheromoneGlobalReaction<T, P>} definisce il metodo \texttt{action(PheromoneLayerImpl<P> phLayer)}.
+Questo metodo è implementato in ogni classe e si occupa di eseguire la logica della reazione.
+Si è scelta questa struttura in quanto i metodi definiti dall'interfaccia \texttt{GlobalReaction<T>}
+sono i medesimi per ogni azione globale e quindi l'utilizzo della classe astratta \texttt{AbstractGlobalReaction},
+che li implementa permette di evitare la duplicazione del codice.
+
+La simulazione esegue una volta al secondo le reazioni in modo tale da garantire un'evoluzione corretta del feromone nel tempo e 
+queste vengono eseguite nell'ordine in cui sono state definite nel file di configurazione YAML\@.
+\subsection{Evaporate}
+Questa classe ha il compito di fare evaporare il feromone dall'ambiente. L'azione di evaporazione è simulata
+attraverso la moltiplicazione del valore del feromone per un coefficente di evaporazione compreso tra 0 e 1, 
+definito dall'utente. Questo evento colpisce ogni singola \textit{patch} dove è presente il feromone.
+Per alterare il valore del feromone do ogni \textit{patch}, viene richiamato il metodo 
+\texttt{evaporate} del \texttt{PheromoneLayer}\space\ref{layer}.
+\newline
+\lstinputlisting[language=Java,label={lst:evaporate}]{listings/evaporate.java}
+
+\subsection{Deposit}
+Il sorgente protagonista di questa sottosezione compie l'azione di depositare il feromone. Dall'ambiente
+vengono individuate le posizioni di tutti i nodi e viene poi richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}
+per modificare il valore di feromone, associato alla posizione attuale del nodo, presente nella struttura dati\space\ref{strDati}.\newline
+\lstinputlisting[language=Java,label={lst:deposit}]{listings/deposit.java}
+
+\subsection{Diffuse}
+Quest'ultima classe si occupa di diffondere il feromone nelle \textit{patch} adiacenti. Vengono quindi individuate tutte
+le \textit{patch}, e per ognuna si calcola il suo vicinato. Se la \textit{patch} ha un valore di feromone superiore ad una soglia definita dall'utente,
+si procede a diffondere il feromone. La diffusione è emulata attraverso la moltiplicazione del valore del feromone
+per un coefficente di diffusione deciso dall'utente. Questa reazione, concettualmente, è simile alla \texttt{Deposit} in quanto
+nel vicinato di una \textit{patch} viene depositato del feromone, e per questo motivo viene richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}.
+\newline
+\lstinputlisting[language=Java,label={lst:diffuse}]{listings/diffuse.java}
+
+\section{NodeProperty}

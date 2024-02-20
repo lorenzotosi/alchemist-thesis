@@ -32,7 +32,7 @@ che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Dunque, c
 feromoni e, muovendosi, ne rilascia una parte nell'ambiente. Alchemist possiede il concetto di nodo\space\ref{node} che, per definizione, 
 è un contenitore di molecole che vive in un ambiente. È stato quindi necessario solamente definire la tipologia di molecola
 appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del mondo reale) in Alchemist.
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.7\linewidth]{figures/nodes.png}
     \caption{Rappresentazione grafica dove ogni punto è un nodo}\label{fig:nodes}
@@ -73,7 +73,7 @@ dalla presenza di un livello di feromone positivo viene individuata e il valore 
 \subsection{Diffusione}
 La diffusione del feromone è un evento che caratterizza in modo diretto il layer e i nodi. Ogni volta che il nodo rilascia il feromone e
 questo si deposita in una \textit{patch}, il layer diffonde nelle \textit{patches} vicine delle tracce dello stesso.
-\begin{figure}[h!]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.7\linewidth]{figures/diffusione.png}
     \caption{Diffusione grafica del feromone}\label{fig:diffusion}

@@ -1,7 +1,40 @@
 \chapter{Contesto}
 %In questo capitolo vengono spiegate le tecnologie adottate. %TODO
 %I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
+\section{NetLogo}
 
+\section{Simulazione di riferimento}\label{refSim}
+La simulazione utilizzata come riferimento per questo progetto di tesi è presente nella libreria
+di modelli di NetLogo\space\cite{wilensky1997netlogo}. Il modello di riferimento è ``Slime``\space\cite{wilensky1997netlogo}
+e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
+Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
+chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
+in tantissime ``micro-aree'' chiamate \textit{patch}. La tartaruga per muoversi 
+``annusa'' davanti a se, ovvero percepisce se nelle \textit{patch} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
+tartaruga si sposterà nella posizione ``annusata'', mentre, in caso contrario la tartaruga si muoverà in modo randomico nello spazio circostante. 
+Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
+il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.6\linewidth]{figures/patch.png}
+    \caption{Il mondo suddiviso in patch}\label{fig:patch}
+\end{figure}
+
+\section{Overview su \textit{slime-mold}}
+Nel contesto della presente tesi, sulla base della simulazione di riferimento\ref{refSim} e i comportamenti osservati in essa, si è scelto di indagare un altro 
+fenomeno dalle caratteristiche estremamente simili: la muffa mucillaginosa.
+In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, \textit{slime-mold}) rappresenta
+comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
+Lo \textit{slime-mold} è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un'entità multicellulare. 
+Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
+La particolarità principale della muffa mucillaginosa è che può comportarsi come un organismo unicellulare o multicellulare a seconda delle diverse 
+condizioni ambientali in cui si trova.
+L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
+Quando trova una fonte di cibo, lo \textit{slime-mold} si aggrega, formando una massa citoplasmatica detta ``plasmodio'', composta da un grande numero cellule. Inoltre,
+questa massa può muoversi, ``navigando'' attraverso il terreno in cerca di cibo.
+Infatti, se le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo \textit{slime-mold} può assumere forme diverse: può formare spore, 
+resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
+che si comporta come un'unica entità, condividendone di conseguenza risorse e compiti.
 \section{Alchemist}
 Alchemist\space\cite{Pianini_2013} è un simulatore DES (Discrete Event System) che estende il modello computazionale 
 base delle reazioni chimiche in modo tale da favorirne l'applicabilità a situazioni complesse,
@@ -62,35 +95,6 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
 \end{figure}
 \clearpage
 
-\section{Simulazione di riferimento}\label{refSim}
-La simulazione utilizzata come riferimento per questo progetto di tesi è presente nella libreria
-di modelli di NetLogo\space\cite{wilensky1997netlogo}. Il modello di riferimento è ``Slime``\space\cite{wilensky1997netlogo}
-e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
-Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
-chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
-in tantissime ``micro-aree'' chiamate \textit{patch}. La tartaruga per muoversi 
-``annusa'' davanti a se, ovvero percepisce se nelle \textit{patch} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
-tartaruga si sposterà nella posizione ``annusata'', mentre, in caso contrario la tartaruga si muoverà in modo randomico nello spazio circostante. 
-Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
-il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.6\linewidth]{figures/patch.png}
-    \caption{Il mondo suddiviso in patch}\label{fig:patch}
-\end{figure}
-\clearpage
-\section{Overview su \textit{slime-mold}}
-Nel contesto della presente tesi, sulla base della simulazione di riferimento\ref{refSim} e i comportamenti osservati in essa, si è scelto di indagare un altro 
-fenomeno dalle caratteristiche estremamente simili: la muffa mucillaginosa.
-In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, \textit{slime-mold}) rappresenta
-comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
-Lo \textit{slime-mold} è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un'entità multicellulare. 
-Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
-La particolarità principale della muffa mucillaginosa è che può comportarsi come un organismo unicellulare o multicellulare a seconda delle diverse 
-condizioni ambientali in cui si trova.
-L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
-Quando trova una fonte di cibo, lo \textit{slime-mold} si aggrega, formando una massa citoplasmatica detta ``plasmodio'', composta da un grande numero cellule. Inoltre,
-questa massa può muoversi, ``navigando'' attraverso il terreno in cerca di cibo.
-Infatti, se le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo \textit{slime-mold} può assumere forme diverse: può formare spore, 
-resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
-che si comporta come un'unica entità, condividendone di conseguenza risorse e compiti.
+
+
+

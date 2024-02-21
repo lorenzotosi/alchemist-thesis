@@ -194,3 +194,123 @@ Con l'implementazione di questa classe e una logica di movimento (implementata n
 pensata per sfruttare questa componente, invece,
 si osserva che il movimento di un singolo nodo risulta piuttosto ``armonioso'' e realistico, più simile a quello di un essere vivente che 
 esplora l'ambiente circostante.
+
+\section{Simulazioni}
+In questa sezione vengono presentati i risultati delle simulazioni effettuate e i loro valori di partenza.
+
+\subsection{Simulazione 1}
+I valori di questa simulazione\space \cref{fig:sim1} sono:
+\begin{itemize}
+    \item Numero di nodi: 500
+    \item \texttt{sniffThreshold}: 1.5
+    \item \texttt{wiggleBias}: 0
+    \item \texttt{evaporation}: 0.6
+    \item \texttt{diffusion}: 0.5
+    \item \texttt{deposit}: 1
+    \item \texttt{startX}: -15
+    \item \texttt{startY}: -15
+    \item \texttt{width}: 30
+    \item \texttt{height}: 30
+    \item \texttt{step}: 0.5
+    \item \texttt{customDiffusionTreshold}: 5
+\end{itemize}
+\subsection{Simulazione 2}
+I valori di questa simulazione\space \cref{fig:sim2} sono:
+\begin{itemize}
+    \item Numero di nodi: 500
+    \item \texttt{sniffThreshold}: 4
+    \item \texttt{wiggleBias}: 0
+    \item \texttt{evaporation}: 0.6
+    \item \texttt{diffusion}: $\frac{1}{18}$
+    \item \texttt{deposit}: 1
+    \item \texttt{startX}: -15
+    \item \texttt{startY}: -15
+    \item \texttt{width}: 30
+    \item \texttt{height}: 30
+    \item \texttt{step}: 0.5
+    \item \texttt{customDiffusionTreshold}: 1
+\end{itemize}
+
+\subsection{Simulazione 3}
+I valori di questa simulazione\space \cref{fig:sim3} sono:
+\begin{itemize}
+    \item Numero di nodi: 100
+    \item \texttt{sniffThreshold}: 1.5
+    \item \texttt{wiggleBias}: 0
+    \item \texttt{evaporation}: 0.6
+    \item \texttt{diffusion}: 0.5
+    \item \texttt{deposit}: 1
+    \item \texttt{startX}: -15
+    \item \texttt{startY}: -15
+    \item \texttt{width}: 30
+    \item \texttt{height}: 30
+    \item \texttt{step}: 0.5
+    \item \texttt{customDiffusionTreshold}: 5
+\end{itemize}
+\subsection{Simulazione 4}
+I valori di questa simulazione\space \cref{fig:sim4} sono:
+\begin{itemize}
+    \item Numero di nodi: 500
+    \item \texttt{sniffThreshold}: 4
+    \item \texttt{wiggleBias}: 0
+    \item \texttt{evaporation}: 0.6
+    \item \texttt{diffusion}: $\frac{1}{18}$
+    \item \texttt{deposit}: 1
+    \item \texttt{startX}: -15
+    \item \texttt{startY}: -15
+    \item \texttt{width}: 30
+    \item \texttt{height}: 30
+    \item \texttt{step}: 0.5
+    \item \texttt{customDiffusionTreshold}: 1
+\end{itemize}
+\subsection{Simulazione 5}
+I valori di questa simulazione\space \cref{fig:sim5} sono:
+\begin{itemize}
+    \item Numero di nodi: 500
+    \item \texttt{sniffThreshold}: 4
+    \item \texttt{wiggleBias}: 0
+    \item \texttt{evaporation}: 0.5
+    \item \texttt{diffusion}: 1
+    \item \texttt{deposit}: 2
+    \item \texttt{startX}: -10
+    \item \texttt{startY}: -10
+    \item \texttt{width}: 20
+    \item \texttt{height}: 20
+    \item \texttt{step}: 0.5
+    \item \texttt{customDiffusionTreshold}: 10
+\end{itemize}
+\begin{figure}[ht]
+    \centering
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/rect0.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/rect100.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/rectFine.png}}
+    \caption{(a) Inizio (b) Dopo 100 secondi (c) Dopo 300 secondi}\label{fig:sim1}
+\end{figure}
+\begin{figure}
+    \centering
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/slow0.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/slow100.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/slowF.png}}
+    \caption{(a) Inizio (b) Dopo 100 secondi (c) Dopo 300 secondi}\label{fig:sim2}
+\end{figure}
+\begin{figure}
+    \centering
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/cento0.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/cento100.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/centoF.png}}
+    \caption{(a) Inizio (b) Dopo 100 secondi (c) Dopo 300 secondi}\label{fig:sim3}
+\end{figure}
+\begin{figure}
+    \centering
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/centoNo0.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/centoNo100.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/centoNoF.png}}
+    \caption{(a) Inizio (b) Dopo 100 secondi (c) Dopo 300 secondi}\label{fig:sim4}
+\end{figure}
+\begin{figure}
+    \centering
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/small0.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/small100.png}} 
+    \subfigure[]{\includegraphics[width=0.32\textwidth]{figures/smallF.png}}
+    \caption{(a) Inizio (b) Dopo 100 secondi (c) Dopo 300 secondi}\label{fig:sim5}
+\end{figure}

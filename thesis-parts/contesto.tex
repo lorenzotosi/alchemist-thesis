@@ -2,14 +2,17 @@
 %In questo capitolo vengono spiegate le tecnologie adottate. %TODO
 %I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
 \section{NetLogo}
+NetLogo\space\cite{wilensky1997netlogo} è un ambiente di programmazione e simulazione open-source
+progettato per eseguire simulazioni di modelli complessi e dinamici.
+
 
 \subsection{Simulazione di riferimento}\label{refSim}
 La simulazione utilizzata come riferimento per questo progetto di tesi è presente nella libreria
-di modelli di NetLogo\space\cite{wilensky1997netlogo}. Il modello di riferimento è ``Slime``\space\cite{wilensky1997netlogo}
+di modelli di NetLogo. Il modello di riferimento è ``Slime``\space\cite{wilensky1997netlogo}
 e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
 Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
 chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
-in tantissime ``micro-aree'' chiamate \textit{patch}. La tartaruga per muoversi 
+in tantissime ``micro-aree'' chiamate \textit{patch}\space\cref{fig:patch}. La tartaruga per muoversi 
 ``annusa'' davanti a se, ovvero percepisce se nelle \textit{patch} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
 tartaruga si sposterà nella posizione ``annusata'', mentre, in caso contrario la tartaruga si muoverà in modo randomico nello spazio circostante. 
 Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
@@ -53,7 +56,7 @@ eseguibili all'interno. Attualmente troviamo 4 incarnazioni:
     \item Scafi
 \end{itemize}
 \subsection{Il meta-modello} 
-Come accennato in precedenza, il meta-modello è uno dei punti di forza maggiori di Alchemist. 
+Come accennato in precedenza, il meta-modello \cref{fig:rmodelAlchemist} è uno dei punti di forza maggiori di Alchemist. 
 Per meta-modello si intende un tipo di paradigma che descrive la struttura, le regole e le relazioni
 che i modelli di dati devono seguire all'interno di un sistema. Rappresenta in modo astratto i 
 concetti e le relazioni all'interno del dominio di interesse e stabilisce i vincoli e le convenzioni
@@ -72,7 +75,7 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
     \end{itemize}
     \item \textbf{Vicinato} (\textit{neighborhood}): un entità composta da un nodo centrale e un insieme di nodi vicini.
     \item \textbf{Regola di collegamento} (\textit{linking rule}): una funzione relativa allo stato corrente dell'ambiente che associa ad ogni nodo un vicinato.
-    \item \textbf{Reazione} (\textit{reaction}): un qualsiasi evento che provoca un cambiamento dello stato dell'ambiente. È definita da una lista di condizioni, una o più lista di azioni e una distribuzione temporale. La frequenza con la quale avviene una reazione dipende da:
+    \item \textbf{Reazione} (\textit{reaction}): un qualsiasi evento che provoca un cambiamento dello stato dell'ambiente \cref{fig:reactionAlchemist}. È definita da una lista di condizioni, una o più lista di azioni e una distribuzione temporale. La frequenza con la quale avviene una reazione dipende da:
     \begin{itemize}
         \item Un parametro statico ``rate''.
         \item Il valore di ogni condizione.

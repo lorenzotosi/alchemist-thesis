@@ -11,13 +11,8 @@ Per avviare il progetto in Alchemist, è necessario delineare accuratamente i pa
 e le opzioni desiderate attraverso un file di configurazione YAML\@. Questo file fornisce
 le istruzioni necessarie per definire il comportamento del simulatore, specificare
 i componenti del sistema e regolare le interazioni tra di essi.
-\clearpage
+
 \section{Layer}\label{layer}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.5\linewidth]{figures/pheromoneLayer.png}
-    \caption{Struttura PheromoneLayer}\label{fig:phLayer}
-\end{figure}
 Il \texttt{PheromoneLayer<P extends Position2D<P>>}, layer personalizzato della simulazione, è stato implementato 
 come un'interfaccia che estende \texttt{Layer<T, P>} - interfaccia propria di Alchemist -
 dove \texttt{T} è il tipo di nodo e \texttt{P} è il tipo di posizione. 
@@ -131,11 +126,6 @@ classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i 
 \clearpage
 
 \section{GlobalReactions}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.7\linewidth]{figures/global.png}
-    \caption{Schema delle Global Reaction }\label{fig:global}
-\end{figure}
 In questa sezione del progetto sono state implementate le reazioni globali della simulazione. Possiamo trovare:
 \begin{itemize}
     \item \texttt{Evaporate}: azione che permette di far evaporare il feromone.

@@ -17,6 +17,12 @@ Il layer, chiamato \textit{PheromoneLayer} ha come compiti:
     \item Condividere con le altre classi la struttura dati contenente la quantità di feromone per una specifica posizione.
     \item Lasciare la possibilità all'utente di decidere le dimensioni dell'area totale di riferimento e di ogni \textit{patch}.
 \end{itemize}
+Di seguito si riporta un diagramma UML \cref{fig:phLayer} che rappresenta il layer.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.5\linewidth]{figures/pheromoneLayer.png}
+    \caption{Struttura PheromoneLayer}\label{fig:phLayer}
+\end{figure}
 
 \subsection{Le posizioni}
 Un aspetto di particolare rilevanza è stato il processo decisionale relativo alla gestione delle posizioni collegate 
@@ -25,17 +31,18 @@ in ``micro-aree'' chiamate \textit{patch}. In Alchemist, tuttavia, non è presen
 in quanto le posizioni sono puntiformi e non necessariamente hanno coordinate intere. Il layer sviluppato ricalca l'area (rettangolare o quadrata) del sistema iniziale,
 implementando anche un sistema di conversione che trasforma la posizione puntiforme in modo tale da emulare la presenza di una ``area'' bidimensionale, a forma di quadrato, che corrisponde alla \textit{patch}.
 Entrambe le misure, ovvero quella della griglia e quella della \textit{patch} sono dinamiche e possono essere modificate dall'utente.
-\section{Le entità}
+\section{I nodi}
 Una volta definito l'ambiente di simulazione è importante determinare la struttura e la logica delle 
 entità che lo abiteranno. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le \textit{tartarughe}
 che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Dunque, concettualmente, la \textit{tartaruga} è un ``contenitore'' infinito di 
 feromoni e, muovendosi, ne rilascia una parte nell'ambiente. Alchemist possiede il concetto di nodo\space\ref{node} che, per definizione, 
 è un contenitore di molecole che vive in un ambiente. È stato quindi necessario solamente definire la tipologia di molecola
 appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del mondo reale) in Alchemist.
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{figures/nodes.png}
-    \caption{Rappresentazione grafica dove ogni punto è un nodo}\label{fig:nodes}
+    \caption{Rappresentazione grafica dove ogni punto è un nodo.}\label{fig:nodes}
 \end{figure}
 
 \section{Direzioni}
@@ -55,13 +62,19 @@ La Reazione Globale o \textit{Global Reaction} rappresenta uno strumento fondame
 le interazioni e i processi che avvengono all'interno di un sistema simulato.
 Possono essere utilizzate per modellare una vasta gamma di fenomeni, dalla diffusione chimica alla dinamica dei sistemi biologici.
 Contrariamente alle reazioni locali, le \textit{Global Reaction} hanno effetti concreti sull'intero contesto in esame. 
-Realizzare una modellazione precisa e realistica di questi fenomeni può essere di grande interesse per indagare tutti i risultati possibili.. 
-Nell'ambito di questa tesi si individuano 3 tipi di reazioni, tutte collegate ai feromoni:
+Realizzare una modellazione precisa e realistica di questi fenomeni può essere di grande interesse per indagare tutti i risultati possibili.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.7\linewidth]{figures/global.png}
+    \caption{Schema delle Global Reaction }\label{fig:global}
+\end{figure}\newline
+Come si vede in figura \cref{fig:global}, nell'ambito di questa tesi si individuano 3 tipi di reazioni, tutte collegate ai feromoni:
 \begin{itemize}
     \item Rilascio (\textit{Deposit})
     \item Evaporazione (\textit{Evaporation})
     \item Diffusione (\textit{Diffusion})
 \end{itemize}
+
 \subsection{Rilascio}
 Questa reazione coinvolge in modo diretto il nodo, l'ambiente e il layer. Durante ogni movimento il nodo rilascia 
 nell'ambiente una certa quantità di feromone in una posizione discreta. Il layer si occupa della raccolta del feromone,
@@ -75,6 +88,9 @@ La diffusione \cref{fig:diffusion} del feromone è un evento che caratterizza in
 questo si deposita in una \textit{patch}, il layer diffonde nelle \textit{patches} vicine delle tracce dello stesso.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.7\linewidth]{figures/diffusione.png}
-    \caption{Diffusione grafica del feromone}\label{fig:diffusion}
+    \subfigure[]{\includegraphics[width=0.3\textwidth]{figures/dif0.png}} 
+    \subfigure[]{\includegraphics[width=0.3\textwidth]{figures/diffusione.png}} 
+    \subfigure[]{\includegraphics[width=0.3\textwidth]{figures/difF.png}} 
+    \caption{Il processo di diffusione; la figura (a) mostra il feromone in una \textit{patch}, la figura (b) mostra le \textit{patch} vicine nelle 
+    quali il feromone verrà diffuso e la figura (c) mostra lo stato dell'ambiente una volta che la diffusione è terminata.}\label{fig:diffusion}
 \end{figure}

@@ -3,23 +3,34 @@
 %I suggest referencing stuff as follows: \cref{fig:random-image} or \Cref{fig:random-image}
 \section{NetLogo}
 NetLogo\space\cite{wilensky1997netlogo} è un ambiente di programmazione e simulazione open-source
-progettato per eseguire simulazioni di modelli complessi e dinamici.
-
+progettato per eseguire simulazioni di modelli complessi e dinamici. È stato sviluppato da Uri Wilensky
+e collaboratori presso il Center for Connected Learning and Computer-Based Modeling presso la Northwestern University.
+NetLogo è particolarmente adatto per simulare sistemi complessi emergenti, come ad esempio il comportamento
+degli agenti, la dinamica dei sistemi, la teoria dei giochi e la teoria dei sistemi complessi.
+Il linguaggio di programmazione di NetLogo è molto semplice e permette di scrivere codice in modo
+intuitivo e veloce. Inoltre, NetLogo è dotato di un'interfaccia grafica che permette di visualizzare
+in tempo reale il comportamento del sistema simulato. NetLogo è un simulatore ad agenti, ovvero un
+programma che simula il comportamento di un insieme di agenti che interagiscono tra di loro e con
+l'ambiente circostante. Ogni agente in NetLogo può rappresentare una vasta gamma di entità con propria autonomia
+decisionale. Gli agenti più comuni sono le \textit{tartarughe}, ovvero entità ``vive'' che si muovono in uno spazio,
+\textit{patch}, ovvero le celle che compongono lo spazio, i \textit{link}, ovvero le connessioni tra le \textit{tartarughe} e 
+le \textit{patch} e gli \textit{observer}, ovvero l'agente monitor della simulazione.
 
 \subsection{Simulazione di riferimento}\label{refSim}
 La simulazione utilizzata come riferimento per questo progetto di tesi è presente nella libreria
 di modelli di NetLogo. Il modello di riferimento è ``Slime``\space\cite{wilensky1997netlogo}
-e per simulare l'aggregazione di tanti singoli organismi in un gruppo si fa riferimento al comportamento delle tartarughe.
+e per simulare l'aggregazione di tanti singoli organismi in un gruppo vengono usati gli agenti sopra descritti, 
+ovvero le \textit{patch} e le \textit{tartarughe}.
 Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
 chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
-in tantissime ``micro-aree'' chiamate \textit{patch}\space\cref{fig:patch}. La tartaruga per muoversi 
+in tantissime ``micro-aree'' chiamate \textit{patch}\space\cref{fig:patch}. La \textit{tartaruga} per muoversi 
 ``annusa'' davanti a se, ovvero percepisce se nelle \textit{patch} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
-tartaruga si sposterà nella posizione ``annusata'', mentre, in caso contrario la tartaruga si muoverà in modo randomico nello spazio circostante. 
+\textit{tartaruga} si sposterà nella posizione ``annusata'', mentre, in caso contrario la \textit{tartaruga} si muoverà in modo randomico nello spazio circostante. 
 Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
 il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.6\linewidth]{figures/patch.png}
+    \includegraphics[scale=0.6]{figures/patch.png}
     \caption{Il mondo suddiviso in patch}\label{fig:patch}
 \end{figure}
 
@@ -88,12 +99,12 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.8\linewidth]{figures/alchemistReaction.png}
+    \includegraphics[width=.6\linewidth]{figures/alchemistReaction.png}
     \caption{Rappresentazione di una reazione in Alchemist}\label{fig:reactionAlchemist}
 \end{figure}
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.8\linewidth]{figures/alchemistModel.png}
+    \includegraphics[width=.6\linewidth]{figures/alchemistModel.png}
     \caption{Il modello di Alchemist}\label{fig:rmodelAlchemist}
 \end{figure}
 \clearpage

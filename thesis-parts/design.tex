@@ -7,7 +7,7 @@ di inserire nell'ambiente degli ``strati'' invisibili che hanno il compito di ra
 È possibile, in Alchemist, definire questi ``strati'' di dati, chiamati Layer.
 \newline
 Nel contesto di questo progetto è stato necessario l'utilizzo di un Layer che avesse la funzione di ``rete di raccolta''
-dei feromoni che, nella simulazione di riferimento\space\ref{refSim}, venivano rilasciati dalle tartarughe nelle varie posizioni
+dei feromoni che, nella simulazione di riferimento\space\ref{refSim}, venivano rilasciati dalle \textit{tartarughe} nelle varie posizioni
 dello spazio. In questo caso il layer ha la stessa dimensione dell'ambiente, in modo tale da poter suddividere l'intera area nelle varie \textit{patch} di cui si 
 è discusso sopra.
 Il layer, chiamato \textit{PheromoneLayer} ha come compiti:
@@ -27,20 +27,20 @@ implementando anche un sistema di conversione che trasforma la posizione puntifo
 Entrambe le misure, ovvero quella della griglia e quella della \textit{patch} sono dinamiche e possono essere modificate dall'utente.
 \section{Le entità}
 Una volta definito l'ambiente di simulazione è importante determinare la struttura e la logica delle 
-entità che lo abiteranno. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le tartarughe
-che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Dunque, concettualmente, la tartaruga è un ``contenitore'' infinito di 
+entità che lo abiteranno. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le \textit{tartarughe}
+che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Dunque, concettualmente, la \textit{tartaruga} è un ``contenitore'' infinito di 
 feromoni e, muovendosi, ne rilascia una parte nell'ambiente. Alchemist possiede il concetto di nodo\space\ref{node} che, per definizione, 
 è un contenitore di molecole che vive in un ambiente. È stato quindi necessario solamente definire la tipologia di molecola
 appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del mondo reale) in Alchemist.
-\begin{figure}[ht]
+\begin{figure}[ht!]
     \centering
-    \includegraphics[width=.7\linewidth]{figures/nodes.png}
+    \includegraphics[width=.5\linewidth]{figures/nodes.png}
     \caption{Rappresentazione grafica dove ogni punto è un nodo}\label{fig:nodes}
 \end{figure}
-\clearpage
+
 \section{Direzioni}
-Un aspetto importante da considerare è la direzione del movimento delle tartarughe. Nella simulazione di riferimento\space\ref{refSim} le tartarughe
-si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle tartarughe,
+Un aspetto importante da considerare è la direzione del movimento delle \textit{tartarughe}. Nella simulazione di riferimento\space\ref{refSim} le \textit{tartarughe}
+si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle \textit{tartarughe},
 è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con delle direzioni facilmente accessibili 
 e modificabili in base alle esigenze.
 

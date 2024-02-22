@@ -1,3 +1,14 @@
+abstract ok
+1 intro ok
+struttura da rifare
+2 contesto ok
+3 ok manca diagramma nodi (?)
+4 diagramma sequenze
+5 ok
+6 da rifare
+7 conclusioni da finire
+8 ringraziamenti da fare
+
 # Bachelors' and Masters' Degree Theses: Guidelines
 
 ### Using this repository

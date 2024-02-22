@@ -14,7 +14,7 @@ i componenti del sistema e regolare le interazioni tra di essi.
 
 \section{Layer}\label{layer}
 Il \texttt{PheromoneLayer<P extends Position2D<P>>}, layer personalizzato della simulazione, è stato implementato 
-come un'interfaccia che estende \texttt{Layer<T, P>} - interfaccia propria di Alchemist -
+come un'interfaccia che estende \texttt{Layer<T, P>} - interfaccia propria di Alchemist - 
 dove \texttt{T} è il tipo di nodo e \texttt{P} è il tipo di posizione. 
 L'utilizzo del parametro \texttt{P} implica che il \texttt{PheromoneLayer} può essere utilizzato con qualsiasi tipo di posizione, ma, nel contesto di questa tesi,
 si è preferito sfruttare posizioni \texttt{Position2D<P>} bidimensionali.
@@ -34,7 +34,7 @@ si occupa di convertire questa posizione in una appartenente ad una \textit{patc
 Il \texttt{PheromoneLayer} esegue, quindi, un arrotondamento per eccesso o per difetto, in modo tale da ottenere la posizione della \textit{patch} più vicina.
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=.5\linewidth]{figures/patch-nodi.png}
+    \includegraphics[width=.3\linewidth]{figures/patch-nodi.png}
     \caption{Rappresentazione grafica delle \textit{patches} puntiformi. Ogni punto rappresenta una patch,
     mentre i quadratini rappresentano i nodi e la freccia indica su che \textit{patch} il nodo depositerà il feromone. In questo esempio
     startX e startY hanno come valore 0, width e height 1 e step 0.5}\label{fig:patch-nodi}
@@ -118,7 +118,7 @@ classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i 
     \item \texttt{pheromone}: la quantità di feromone che il nodo rilascia.
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure}
     \centering
     \includegraphics[width=.7\linewidth]{figures/nodeinfo.jpg}
     \caption{Le informazioni del nodo. Si possono osservare nella sezione ``Content''}\label{fig:nodeinfo}
@@ -152,7 +152,7 @@ definito dall'utente. Questo evento ha effetto su ogni singola \textit{patch} in
 Per alterare il valore del feromone di ogni \textit{patch}, viene richiamato il metodo 
 \texttt{evaporate} del \texttt{PheromoneLayer}\space\ref{layer}.
 \newline
-\lstinputlisting[language=Java,label={lst:evaporate}]{listings/evaporate.java}
+\lstinputlisting[language=Java,label={lst:evaporate}]{listings/evaporate.java}[ht]
 
 \subsection{Deposit}
 Il sorgente protagonista di questa sotto-sezione compie l'azione di depositare il feromone. Dall'ambiente

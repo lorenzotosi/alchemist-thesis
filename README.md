@@ -2,7 +2,7 @@ abstract ok
 1 intro ok
 struttura da rifare
 2 contesto ok
-3 ok manca diagramma nodi (?)
+3 ok ok
 4 diagramma sequenze
 5 ok
 6 da rifare

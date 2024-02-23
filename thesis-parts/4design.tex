@@ -1,7 +1,7 @@
 \chapter{Design}
 \section{Layer}
 Si pensi alla simulazione come se fosse un micro-mondo, una ``città'' complessa
-e ricca di informazioni. È di interesse capire il livello di temperatura oppure di inquinamento nelle varie aree cittadine, dati invisibili
+e ricca di informazioni. È di interesse indagare il livello di temperatura oppure di inquinamento nelle varie aree cittadine, dati invisibili
 all'occhio umano ma comunque presenti nell'ambiente e percepibili da chi lo abita. Si ha bisogno
 di inserire nell'ambiente degli ``strati'' invisibili che hanno il compito di raccogliere queste informazioni.
 È possibile, in Alchemist, definire questi ``strati'' di dati, chiamati Layer.
@@ -10,10 +10,10 @@ Nel contesto di questo progetto è stato necessario l'utilizzo di un Layer che a
 dei feromoni che, nella simulazione di riferimento\space\ref{refSim}, venivano rilasciati dalle \textit{tartarughe} nelle varie posizioni
 dello spazio. In questo caso il layer ha la stessa dimensione dell'ambiente, in modo tale da poter suddividere l'intera area nelle varie \textit{patch} di cui si 
 è discusso sopra.
-Il layer, chiamato \textit{PheromoneLayer} ha come compiti:
+Il layer, chiamato \textit{PheromoneLayer} deve soddisfare i seguenti requisiti:
 \begin{itemize}
     \item Implementare una struttura dati per tenere traccia della quantità di feromone presente in ogni posizione.
-    \item Offrire un modo per aggiornare i valori del feromone.
+    \item Offrire una strategia per aggiornare i valori del feromone.
     \item Condividere con le altre classi la struttura dati contenente la quantità di feromone per una specifica posizione.
     \item Lasciare la possibilità all'utente di decidere le dimensioni dell'area totale di riferimento e di ogni \textit{patch}.
 \end{itemize}
@@ -33,7 +33,7 @@ implementando anche un sistema di conversione che trasforma la posizione puntifo
 Entrambe le misure, ovvero quella della griglia e quella della \textit{patch} sono dinamiche e possono essere modificate dall'utente.
 \section{I nodi}
 Una volta definito l'ambiente di simulazione è importante determinare la struttura e la logica delle 
-entità che lo abiteranno. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le \textit{tartarughe}
+entità che lo abitano. Nella simulazione di riferimento\space\ref{refSim} è possibile individuare come abitanti le \textit{tartarughe}
 che, muovendosi, rilasciano una traccia chimica chiamata ``feromone''. Dunque, concettualmente, la \textit{tartaruga} è un ``contenitore'' infinito di 
 feromoni e, muovendosi, ne rilascia una parte nell'ambiente. Alchemist possiede il concetto di nodo\space\ref{node} che, per definizione, 
 è un contenitore di molecole che vive in un ambiente. È stato quindi necessario solamente definire la tipologia di molecola
@@ -84,10 +84,10 @@ questo si deposita in una \textit{patch}, il layer diffonde nelle \textit{patche
 \end{figure}
 \section{Direzioni}
 Un aspetto importante da considerare è la direzione del movimento delle \textit{tartarughe}. Nella simulazione di riferimento\space\ref{refSim} le \textit{tartarughe}
-si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle \textit{tartarughe},
-è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con delle direzioni facilmente accessibili 
+si muovono e seguono un percorso che è influenzato dalla loro direzione. Poichè questo è un attributo proprio delle \textit{tartarughe},
+è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con direzioni facilmente accessibili 
 e modificabili in base alle esigenze.
 
 Alchemist rende possibile la definizione di attributi personalizzati per i nodi, chiamati \textit{Node Property}. Il corretto utilizzo di questa
-funzionalità ha permesso di definire un attributo di tipo \textit{Direction} per ogni nodo che rappresentasse la direzione 
+funzionalità ha permesso di definire un attributo di tipo \textit{Direction} per ogni nodo che rappresentasse la direzione, 
 in modo tale da poter simulare in modo realistico questo aspetto della simulazione.

@@ -27,7 +27,7 @@ Per la sua creazione è necessario definire 5 misure:
     \item \texttt{step}: la dimensione del passo, ovvero la lunghezza del lato di ogni \textit{patch}.
 \end{itemize}
 Lo \texttt{step} è un parametro fondamentale per la corretta implementazione della simulazione
-in quanto Alchemist non possiede il concetto di area, necessaria per individuare una \textit{patch}.
+in quanto Alchemist non possiede il concetto di area, necessario per individuare una \textit{patch}.
 Queste vengono rappresentate come ``aree'' puntiformi, e la loro dimensione (ovvero la distanza di un punto dall'altro) è appunto definita da questo parametro.
 Nella simulazione, il nodo deposita il feromone in una qualsiasi posizione, discreta e non obbligatoriamente intera, all'interno dei limiti dello spazio, e il \texttt{PheromoneLayer} 
 si occupa di convertire questa posizione in una appartenente ad una \textit{patch}. 
@@ -39,13 +39,12 @@ Il \texttt{PheromoneLayer} esegue, quindi, un arrotondamento per eccesso o per d
     mentre i quadratini rappresentano i nodi e la freccia indica su che \textit{patch} il nodo depositerà il feromone. In questo esempio
     startX e startY hanno come valore 0, width e height 1 e step 0.5}\label{fig:patch-nodi}
 \end{figure}
-%devo parlare della Mappa e delle posizioni, di come vengono convertite magari aggiungendo delle foto.
 
 \subsection{Struttura dati}\label{strDati}
 Un aspetto di fondamentale importanza riguarda la struttura dati utilizzata per la gestione del feromone.
 Per ovviare alla mancanza del concetto di area, è stato utilizzato un \texttt{HashMap<P, Double>} che associa ad ogni posizione \texttt{P} un valore \texttt{Double} di feromone.
 Questa mappa viene inizializzata nel costruttore della classe attraverso il metodo \texttt{setupEnviromnent()} che si occupa di popolare la mappa
-con tutte le possibili posizioni delle \textit{patch} e di inizializzare il feromone a 0.\newline
+con tutte le possibili posizioni delle \textit{patches} e di inizializzare il feromone a 0.\newline
 
 \lstinputlisting[language=Java,label={lst:phlayer}]{listings/phlayerSetup.java}
 
@@ -59,7 +58,7 @@ I metodi definiti nell'interfaccia e implementati nella classe sono:
     \item \texttt{Rectangle getLayerBounds()}: metodo che restituisce un oggetto di tipo \texttt{Rectangle}, contentente i parametri per delineare l'area del Layer.
 \end{itemize}
 Di grande importanza sono i primi due metodi: \texttt{evaporate} e \texttt{deposit}.
-Entrambi sono nominati come le reazioni globali della simulazione e vengono utilizzati dalle stesse per accedere la mappa e modificare il feromone.\newline
+Entrambi sono denominati come le reazioni globali della simulazione e vengono utilizzati dalle stesse per accedere la mappa e modificare il feromone.\newline
 \lstinputlisting[language=Java,label={lst:phlayer}]{listings/phLayerDepositAndEvaporate.java}
 
 \section{Actions}
@@ -73,11 +72,11 @@ In questa sezione vengono descritte le azioni della simulazione. Possiamo trovar
 La classe \texttt{MoveNode<P extends Position<P> \& Position2D<P>>} incorpora l'intera logica che permette il movimento di ogni singolo nodo. 
 Per la sua creazione è necessario che l'utente definisca i seguenti parametri:
 \begin{itemize}
-    \item \texttt{sniffThreshold}: la soglia di feromone che il nodo deve percepire per potersi muovere.
+    \item \texttt{sniffThreshold}: il valore minimo di feromone che il nodo deve percepire per potersi muovere.
     \item \texttt{sniffDistance}: la distanza del passo di movimento.
     \item \texttt{wiggleBias}: la tendenza a preferire un movimento casuale oscillatorio in una direzione specifica.
 \end{itemize}
-Il parametro \texttt{wiggleBias} può essere impostato in 3 modi:
+Il parametro \texttt{wiggleBias} è stato implementato in modo tale da poter associare a 3 intervalli di valori, altrettanti comportamenti:
 \begin{itemize}
     \item \texttt{0}: il nodo ha il 50\% di muoversi in avanti e il 25\% di muoversi a destra o a sinistra.
     \item \texttt{0 > x <= 40}: il nodo tende a preferire la direzione di sinistra; il valore indica la probabilità di muoversi in quel verso.
@@ -90,8 +89,8 @@ Tra questi, il metodo \texttt{execute} è il più importante, in quanto si occup
 La logica di movimento segue questi passi:
 \begin{enumerate}
     \item Viene individuata la posizione attuale del nodo.
-    \item Questa posizione viene adattata alla \textit{patch} più vicina.
-    \item Vengono calcolate le direzioni possibili in base alle patch adiacenti alla posizione calcolata precedentemente che hanno una 
+    \item Questa posizione viene pilotata alla \textit{patch} più vicina.
+    \item Vengono calcolate le direzioni possibili in base alle \textit{patches} adiacenti alla posizione calcolata precedentemente, aventi una 
     concentrazione di feromone superiore ad una soglia definita dall'utente (il parametro si chiama \texttt{sniffThreshold}).
     \item Viene identificata la \textit{patch} con la maggiore concentrazione di feromone. Tuttavia, questa, non è sempre individuabile. Vi sono due casi possibili: nel primo, 
         nella \textit{patch} è presente un valore di feromone, ma esso è sotto la soglia minima \texttt{sniffThreshold} e dunque la \textit{patch} viene scartata;
@@ -130,7 +129,7 @@ In questa sezione del progetto sono state implementate le reazioni globali della
 \begin{itemize}
     \item \texttt{Evaporate}: azione che permette di far evaporare il feromone.
     \item \texttt{Deposit}: azione che permette di far diffondere il feromone.
-    \item \texttt{Diffuse}: azione che diffonde il feromone nelle \textit{patch} adiacenti.
+    \item \texttt{Diffuse}: azione che diffonde il feromone nelle \textit{patches} adiacenti.
 \end{itemize}
 Le classi sopra introdotte estendono la classe astratta \texttt{AbstractGlobalReaction<T, P extends Position<P>}
 \& \texttt{Position2D<P>}
@@ -147,7 +146,7 @@ La simulazione esegue una volta al secondo le reazioni in modo tale da garantire
 in questione vengono eseguite nell'ordine in cui sono state definite nel file di configurazione YAML\@.
 \subsection{Evaporate}
 Questa classe ha il compito di fare evaporare il feromone dall'ambiente. L'azione di evaporazione è simulata
-attraverso la moltiplicazione del valore del feromone per un coefficente di evaporazione compreso tra 0 e 1, 
+attraverso la moltiplicazione del valore del feromone per un coefficiente di evaporazione compreso tra 0 e 1, 
 definito dall'utente. Questo evento ha effetto su ogni singola \textit{patch} in cui è presente il feromone.
 Per alterare il valore del feromone di ogni \textit{patch}, viene richiamato il metodo 
 \texttt{evaporate} del \texttt{PheromoneLayer}\space\ref{layer}.
@@ -161,20 +160,20 @@ per modificare il valore del feromone, associato alla posizione attuale del nodo
 \lstinputlisting[language=Java,label={lst:deposit}]{listings/deposit.java}
 
 \subsection{Diffuse}
-Quest'ultima classe si occupa di diffondere il feromone nelle \textit{patch} adiacenti. Vengono quindi individuate tutte
+Quest'ultima classe si occupa di diffondere il feromone nelle \textit{patches} adiacenti. Vengono quindi individuate tutte
 le \textit{patch}, e per ognuna si calcola il suo vicinato. Se la \textit{patch} ha un valore di feromone superiore ad una soglia definita dall'utente,
 si procede a diffondere il feromone. La diffusione è emulata attraverso la moltiplicazione del valore del feromone
-per un coefficente di diffusione deciso dall'utente. Questa reazione, concettualmente, è simile alla \texttt{Deposit} in quanto
+per un coefficiente di diffusione deciso dall'utente. Questa reazione, concettualmente, è simile alla \texttt{Deposit} in quanto
 nel vicinato di una \textit{patch} viene depositato del feromone, e per questo motivo, viene richiamato il metodo \texttt{deposit} del \texttt{PheromoneLayer}\space\ref{layer}.
 \newline
 \lstinputlisting[language=Java,label={lst:diffuse}]{listings/diffuse.java}
 
 \section{NodeProperty}
-La classe \texttt{DirectionProperty} è stata implementata per poter associare ad ogni nodo una proprietà che rispecchiasse la sua direzione attuale.
+La classe \texttt{DirectionProperty} è stata implementata per poter associare ad ogni nodo una proprietà che rispecchi la sua direzione attuale.
 Estende la classe \texttt{AbstractNodeProperty<T>} fornita dal set base di Alchemist.
 L'enum \texttt{Direction}, che definisce le direzioni possibili in cui un nodo può muoversi, è propedeutico all'utilizzo di questa classe.
-L'enum definisce i 4 punti cardinali e i loro punti intermedi. Infatti, un nodo può muoversi in 8 direzioni diverse e, tenere traccia di
-queste, è fondamentale per la corretta esecuzione della simulazione. L'enum, oltre a contenere le definizioni delle direzioni, contiene anche,
+L'\texttt{enum} definisce i 4 punti cardinali e i loro punti intermedi. Infatti, un nodo può muoversi in 8 direzioni diverse e tenere traccia di
+queste è fondamentale per la corretta esecuzione della simulazione. L'\texttt{enum}, oltre a contenere le definizioni delle direzioni, contiene anche,
 per ognuna di esse, metodi che ne ritornano le coordinate x e y e le direzioni adiacenti. All'avvio del programma, ad ogni nodo 
 viene assegnata una direzione in modo randomico. 
 

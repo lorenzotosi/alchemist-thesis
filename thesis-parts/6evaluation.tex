@@ -1,6 +1,6 @@
-\chapter{Evaluation}
+\chapter{Valutazioni}
 In questa sezione vengono presentati i risultati delle simulazioni effettuate e i loro valori.
-Ogni simulazione presenta la propria immagine che ne dimostra i risultati nella sezione \textit{Risultati delle simulazioni}\space\cref{risultati}.
+Nella \cref{risultati} ad ogni simulazione è associata una serie di immagini che mette in luce i risultati ottenuti.
 \section{Simulazione 1}\label{sim1}
 I valori di questa simulazione\space \cref{fig:sim1} sono i seguenti:
 \begin{table}[ht]
@@ -25,11 +25,11 @@ I valori di questa simulazione\space \cref{fig:sim1} sono i seguenti:
         \bottomrule
     \end{tabular}\label{tab:parametri1}
 \end{table}\newline
-Dalle dimensioni dell'ambiente si può osservare che il numero di \textit{patch} è pari a 3721, quindi 3721 punti che 
-immagazzineranno la quantità di feromone depositata dai nodi. Ci si aspetta che l'aggregazione avvenga abbastanza rapidamente e in
-zone definite data l'alta densità di punti di raccolta del feromone e, in generale, dell'ambiente. Con 500 nodi 
-ci si aspetta che appena dei nodi sono vicini rimangano ``intrappolati'' nelle loro posizioni, depositando il feromone e 
-generando un piccolo ``nucleo'' di aggregazione. Una volta formato, tutti i nodi che si trovano nelle vicinanze saranno attratti
+Dalle dimensioni dell'ambiente si può osservare che il numero di \textit{patches} è pari a 3721. A tutti questi punti è assegnato il compito di 
+immagazzinare la quantità di feromone depositata dai nodi. 
+Data l'alta densità di punti di raccolta del feromone ci si aspetta che l'aggregazione avvenga abbastanza rapidamente e in zone ben definite. 
+L'alto numero di nodi, 500 nell'esempio, promette una situazione in cui i nodi vicini tra loro rimangano ``intrappolati'' nelle loro posizioni, continuando a depositare il feromone e 
+generando un piccolo ``nucleo'' di aggregazione. Una volta formato tale agglomerato, tutti i nodi che si trovano nelle vicinanze ne saranno attratti
 e contriburanno a rafforzare l'aggregazione.
 
 
@@ -46,7 +46,7 @@ I valori di questa simulazione\space \cref{fig:sim2} sono i seguenti:
         \texttt{sniffThreshold}     & 4      \\
         \texttt{wiggleBias}         & 0      \\
         \texttt{evaporation}        & 0.6    \\
-        \texttt{diffusion}          & $\frac{1}{18}$ \\
+        \texttt{diffusion}          & 0.0625 \\
         \texttt{deposit}            & 1      \\
         \texttt{startX}             & -15    \\
         \texttt{startY}             & -15    \\
@@ -57,12 +57,10 @@ I valori di questa simulazione\space \cref{fig:sim2} sono i seguenti:
         \hline
     \end{tabular}\label{tab:parametr2}
 \end{table}\newline
-Questa simulazione presenta gli stessi valori della precedente, ma con un valore di \texttt{sniffThreshold} più alto e un valore di \texttt{diffusion} più basso.
-Ci si aspetta che l'aggregazione avvenga più lentamente, i nodi si muovano per più tempo nello spazio prima di aggregarsi o di trovare un 
-agglomerato già presente e che, generamlente, ci saranno meno zone di aggregazione: quindi quelle che ci saranno 
-conterranno un grande numero di nodi. Il motivo di queste deduzioni è principalmente legato al fatto che il valore di \texttt{diffusion} è più basso rispetto alla simulazione
-precedente\space(\cref{sim1}) e il valore di \texttt{sniffThreshold} è più alto. Sarà necessario che un maggior numero di nodi 
-si incontri in un punto per formare un cluster. 
+Questa simulazione presenta valori molti simili a quelli della precedente, ma con un valore di \texttt{sniffThreshold} più alto e un valore di \texttt{diffusion} più basso.
+Il risultato atteso vede un processo di aggregazione più lento dove i nodi si muovono per più tempo nello spazio prima di aggregarsi o di trovare un 
+agglomerato già presente e che, generalmente, ci saranno meno zone di aggregazione. Quelle che si formano 
+tenderanno a contenere un grande numero di nodi: sarà necessario che questi si incontrino in un unico punto per formare un cluster.
 
 \section{Simulazione 3}\label{sim3}
 I valori di questa simulazione\space \cref{fig:sim3} sono i seguenti:
@@ -88,13 +86,19 @@ I valori di questa simulazione\space \cref{fig:sim3} sono i seguenti:
         \bottomrule
     \end{tabular}\label{tab:parametri3}
 \end{table}\newline
-Questa simulazione dimostra che, pur con un numero di nodi estremamente inferiore rispetto alle precedenti,
-l'aggregazione avviene comunque. I valori sono gli stessi della prima simulazione\space(\cref{sim1}), ma con un numero di nodi pari a 100.
-Si osserva che dopo 100 secondi si inizia a sviluppare un'aggregazione lieve, in pochissimi punti dello spazio.
-Dopo 300 secondi si può notare che l'aggregazione si è rafforzata in quei punti, ma sono presenti ancora diversi nodi vaganti.
+Questa simulazione dimostra che, pur con un numero di nodi estremamente inferiore rispetto ai precedenti esempi,
+l'aggregazione avviene in ogni caso.
+Si osserva che, dopo 100 secondi, si iniziano a formare piccole aggregazioni in pochissimi punti dello spazio.
+Dopo 300 secondi si può notare che l'aggregazione si è rafforzata in quei punti, ma sono presenti ancora diversi nodi in movimento.
 
 
 \section{Simulazione 4}\label{sim4}
+Questa simulazione presenta gli stessi valori della seconda simulazione\space(\cref{sim2}), ma con un numero di nodi pari a 100.
+Lo scopo di questa simulazione è quello di confrontare i risultati con la terza simulazione\space(\cref{sim3}), che presenta gli stessi valori della prima simulazione\space(\cref{sim1}),
+ma con differenze nel \texttt{sniffThreshold} e \texttt{diffusion}. In questo caso non avviene alcuna aggregazione e 
+il motivo principale è legato alle differenze di valori di \texttt{sniffThreshold} e \texttt{diffusion}.
+
+I valori di questa simulazione\space \cref{fig:sim4} sono i seguenti:
 \begin{table}[ht]
     \centering
     \caption{Valori dei parametri}
@@ -106,7 +110,7 @@ Dopo 300 secondi si può notare che l'aggregazione si è rafforzata in quei punt
         \texttt{sniffThreshold}     & 4      \\
         \texttt{wiggleBias}         & 0      \\
         \texttt{evaporation}        & 0.6    \\
-        \texttt{diffusion}          & $\frac{1}{18}$ \\
+        \texttt{diffusion}          & 0.0625 \\
         \texttt{deposit}            & 1      \\
         \texttt{startX}             & -15    \\
         \texttt{startY}             & -15    \\
@@ -117,14 +121,6 @@ Dopo 300 secondi si può notare che l'aggregazione si è rafforzata in quei punt
         \hline
     \end{tabular}\label{tab:parametri4}
 \end{table}
-
-Questa simulazione presenta gli stessi valori della seconda simulazione\space(\cref{sim2}), ma con un numero di nodi pari a 100.
-Lo scopo di questa simulazione è quello di confrontare i risultati con la terza simulazione\space(\cref{sim3}), che presenta gli stessi valori della prima simulazione\space(\cref{sim1}),
-ma con differenze nel \texttt{sniffThreshold} e \texttt{diffusion}. In questo caso non avviene alcuna aggregazione e 
-il motivo principale è legato alle differenze di valori di \texttt{sniffThreshold} e \texttt{diffusion}.
-
-I valori di questa simulazione\space \cref{fig:sim4} sono i seguenti:
-
 
 \section{Simulazione 5}\label{sim5}
 I valori di questa simulazione\space \cref{fig:sim5} sono i seguenti:

@@ -7,7 +7,7 @@ Nello stato dell'arte attuale sono presenti diversi simulatori che permettono di
 Questo strumento ha rivestito un'importanza fondamentale per un riferimento iniziale e per la comprensione del fenomeno in esame.
 In particolare, la \textbf{simulazione di riferimento} ``Slime'' è stata utilizzata come base per lo sviluppo del modello di simulazione in Alchemist.
 A partire da ciò, nasce l'interesse di indagare un altro fenomeno dalle caratteristiche estremamente simili: la \textbf{muffa mucillaginosa}.
-Questo lavoro di tesi si propone con l'obiettivo di sviluppare le principali astrazioni, necessarie per modellare il questo fenomeno,
+Questo lavoro di tesi si propone l'obiettivo di sviluppare le principali astrazioni, necessarie per modellare il questo fenomeno,
 all'interno del simulatore \textbf{Alchemist}.
 
 \section{NetLogo}
@@ -45,10 +45,10 @@ e per simulare l'aggregazione di tanti singoli organismi in un gruppo vengono us
 ovvero le \textit{patch} e le \textit{tartarughe}.
 Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
 chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
-in tantissime ``micro-aree'' chiamate \textit{patch}\space\cref{fig:patch}. La \textit{tartaruga} per muoversi 
-``annusa'' davanti a se, ovvero percepisce se nelle \textit{patch} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
-\textit{tartaruga} si sposterà nella posizione ``annusata'', mentre, in caso contrario la \textit{tartaruga} si muoverà in modo randomico nello spazio circostante. 
-Durante tutto ciò, le \textit{patches} diffonderanno del ``feromone'' alle varie posizioni vicine e, con il passare del tempo,
+in tantissime ``micro-aree'' chiamate \textit{patches}\space\cref{fig:patch}. La \textit{tartaruga} per muoversi 
+``annusa'' davanti a sè, ovvero percepisce se nelle \textit{patches} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
+\textit{tartaruga} si sposterà nella posizione ``annusata'', mentre, in caso contrario, la \textit{tartaruga} si muoverà in modo randomico nello spazio circostante. 
+Contemporaneamente questo procedimento, le \textit{patches} diffonderanno il ``feromone'' alle posizioni vicine e, con il passare del tempo,
 il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
 
 \begin{figure}[ht]
@@ -58,16 +58,16 @@ il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
 \end{figure}
 
 \section{Overview su \textit{slime-mold}}
-Nel contesto della presente tesi, sulla base della simulazione di riferimento\ref{refSim} e i comportamenti osservati in essa, si è scelto di indagare un altro 
-fenomeno dalle caratteristiche estremamente simili: la muffa mucillaginosa.
+Nel contesto della presente tesi, sulla base della simulazione di riferimento\ref{refSim} e i comportamenti osservati in essa, si è scelto di studiare un altro 
+fenomeno ad essa molto affine: la muffa mucillaginosa.
 In natura, l'aggregazione delle cellule di muffa mucillaginosa (detti anche funghi mucillaginosi o, in inglese, \textit{slime-mold}) rappresenta
 comportamento in cui entità individuali interagiscono tra di loro per formare strutture complesse e funzionali. 
-Lo \textit{slime-mold} è un organismo unicellulare ma, talvolta, può trovarsi anche ad agire come un'entità multicellulare. 
-Pur non essendo un fungo è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
+Lo \textit{slime-mold} è un organismo unicellulare:
+pur non essendo un fungo, è spesso classificato nella stessa categoria per via delle sue caratteristiche affini a quelle di questi organismi.
 La particolarità principale della muffa mucillaginosa è che può comportarsi come un organismo unicellulare o multicellulare a seconda delle diverse 
 condizioni ambientali in cui si trova.
 L'habitat principale di questi organismi è il terreno umido, dove di solito si nutrono di foglie morte o di tronchi di alberi in putrefazione.
-Quando trova una fonte di cibo, lo \textit{slime-mold} si aggrega, formando una massa citoplasmatica detta ``plasmodio'', composta da un grande numero cellule. Inoltre,
+Quando trova una fonte di cibo, la \textit{slime-mold} si aggrega, formando una massa citoplasmatica detta ``plasmodio'', composta da un grande numero cellule. Inoltre,
 questa massa può muoversi, ``navigando'' attraverso il terreno in cerca di cibo.
 Infatti, se le risorse alimentari scarseggiano o l'ambiente diventa meno ospitale, lo \textit{slime-mold} può assumere forme diverse: può formare spore, 
 resistenti per sopravvivere in condizioni avverse, oppure aggregarsi insieme ad altri individui simili per formare una struttura multicellulare
@@ -93,7 +93,7 @@ eseguibili all'interno. Attualmente troviamo 4 incarnazioni:
 \subsection{Il meta-modello} 
 Come accennato in precedenza, il meta-modello \cref{fig:alchemist} è uno dei punti di forza maggiori di Alchemist. 
 Per meta-modello si intende un tipo di paradigma che descrive la struttura, le regole e le relazioni
-che i modelli di dati devono seguire all'interno di un sistema. Rappresenta in modo astratto i 
+che i modelli di dati devono seguire all'interno di un sistema. Esso rappresenta in modo astratto i 
 concetti e le relazioni all'interno del dominio di interesse e stabilisce i vincoli e le convenzioni
 che tutti i modelli devono usare. Dunque, tutte le incarnazioni sviluppate presentano le stesse entità
 ``base''. Poichè Alchemist è sviluppato partendo da un'ispirazione orientata alla chimica/biochimica,
@@ -112,12 +112,12 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
     \item \textbf{Regola di collegamento} (\textit{linking rule}): una funzione relativa allo stato corrente dell'ambiente che associa ad ogni nodo un vicinato.
     \item \textbf{Reazione} (\textit{reaction}): un qualsiasi evento che provoca un cambiamento dello stato dell'ambiente \cref{fig:alchemist}. È definita da una lista di condizioni, una o più lista di azioni e una distribuzione temporale. La frequenza con la quale avviene una reazione dipende da:
     \begin{itemize}
-        \item Un parametro statico ``rate''.
+        \item Un parametro statico \textit{rate}.
         \item Il valore di ogni condizione.
-        \item Una ``rate equation'', ovvero una equazione che combina il parametro statico (rate) con i valori delle condizioni, restituendo un ``instantaneous rate''.
+        \item Una \textit{rate equation}, ovvero una equazione che combina il parametro statico (\textit{rate}) con i valori delle condizioni, restituendo un \textit{instantaneous rate}.
         \item Una distribuzione temporale.
     \end{itemize}
-    \item \textbf{Condizione} (\textit{condition}): una funzione che, dato lo stato attuale del'ambiente (environment), restituisce un booleano ed un numero. Se il booleano è falso la reazione non può avvenire. In caso contrario, invece, avviene. Il numero può invece influenzare la velocità della reazione a seconda della reazione e della distribuzione temporale.
+    \item \textbf{Condizione} (\textit{condition}): una funzione che, dato lo stato attuale del'ambiente (\textit{environment}), restituisce un booleano ed un numero. Se il booleano è falso la reazione non può avvenire. In caso contrario, invece, avviene. Il numero può invece influenzare la velocità della reazione a seconda della reazione e della distribuzione temporale.
     \item \textbf{Azione} (\textit{action}): un cambiamento nell'ambiente.
 \end{itemize}
 \begin{figure}[ht]

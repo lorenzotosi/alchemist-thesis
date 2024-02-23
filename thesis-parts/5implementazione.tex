@@ -110,14 +110,14 @@ La logica di movimento segue questi passi:
 \end{enumerate}
 
 \subsection{NodeInfo}
-La classe \texttt{NodeInfo<T, P extends Position<P> \& Position2D<P>>} permette di tracciare le informazioni di ogni singolo nodo. Anche questa
+La classe \texttt{NodeInfo<T, P extends Position<P> \& Position2D<P>>} permette di tracciare le informazioni di ogni singolo nodo, come
+raffigurato in figura\space\cref{fig:nodeinfo}. Anche questa
 classe estende la classe astratta \texttt{AbstractAction<T>}, implementandone i metodi. Le informazioni osservabili sono le seguenti:
 \begin{itemize}
     \item \texttt{PheromoneValue}: la concentrazione di feromone nella \textit{patch} in cui si trova il nodo.
     \item \texttt{direction}: la direzione attuale del nodo.
     \item \texttt{pheromone}: la quantità di feromone che il nodo rilascia.
 \end{itemize}
-La figura\space\ref{fig:nodeinfo} mostra le informazioni di un nodo.
 \begin{figure}
     \centering
     \includegraphics[width=.7\linewidth]{figures/nodeinfo.jpg}

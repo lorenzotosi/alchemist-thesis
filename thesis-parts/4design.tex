@@ -44,17 +44,6 @@ appartenente al nodo per tradurre questo aspetto della simulazione (ma anche del
     \includegraphics[width=.5\linewidth]{figures/nodes.png}
     \caption{Rappresentazione grafica dove ogni punto è un nodo.}\label{fig:nodes}
 \end{figure}
-
-\section{Direzioni}
-Un aspetto importante da considerare è la direzione del movimento delle \textit{tartarughe}. Nella simulazione di riferimento\space\ref{refSim} le \textit{tartarughe}
-si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle \textit{tartarughe},
-è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con delle direzioni facilmente accessibili 
-e modificabili in base alle esigenze.
-
-Alchemist rende possibile la definizione di attributi personalizzati per i nodi, chiamati \textit{Node Property}. Il corretto utilizzo di questa
-funzionalità ha permesso di definire un attributo di tipo \textit{Direction} per ogni nodo che rappresentasse la direzione 
-in modo tale da poter simulare in modo realistico questo aspetto della simulazione.
-
 %\section{Il movimento}
 
 \section{Reazioni globali}
@@ -74,7 +63,6 @@ Come si vede in figura \cref{fig:global}, nell'ambito di questa tesi si individu
     \item Evaporazione (\textit{Evaporation})
     \item Diffusione (\textit{Diffusion})
 \end{itemize}
-
 \subsection{Rilascio}
 Questa reazione coinvolge in modo diretto il nodo, l'ambiente e il layer. Durante ogni movimento il nodo rilascia 
 nell'ambiente una certa quantità di feromone in una posizione discreta. Il layer si occupa della raccolta del feromone,
@@ -94,3 +82,12 @@ questo si deposita in una \textit{patch}, il layer diffonde nelle \textit{patche
     \caption{Il processo di diffusione; la figura (a) mostra il feromone in una \textit{patch}, la figura (b) mostra le \textit{patch} vicine nelle 
     quali il feromone verrà diffuso e la figura (c) mostra lo stato dell'ambiente una volta che la diffusione è terminata.}\label{fig:diffusion}
 \end{figure}
+\section{Direzioni}
+Un aspetto importante da considerare è la direzione del movimento delle \textit{tartarughe}. Nella simulazione di riferimento\space\ref{refSim} le \textit{tartarughe}
+si muovono e seguono un percorso che deriva dalla loro direzione. Essendo questo un attributo proprio delle \textit{tartarughe},
+è stato necessario sviluppare una soluzione che permettesse di inizializzare i nodi della simulazione con delle direzioni facilmente accessibili 
+e modificabili in base alle esigenze.
+
+Alchemist rende possibile la definizione di attributi personalizzati per i nodi, chiamati \textit{Node Property}. Il corretto utilizzo di questa
+funzionalità ha permesso di definire un attributo di tipo \textit{Direction} per ogni nodo che rappresentasse la direzione 
+in modo tale da poter simulare in modo realistico questo aspetto della simulazione.

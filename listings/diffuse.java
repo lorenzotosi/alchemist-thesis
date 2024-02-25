@@ -2,10 +2,10 @@ public class Diffuse<T, P extends Position<P> & Position2D<P>> extends AbstractG
     ...
     @Override
     public void action(final PheromoneLayerImpl<P> phLayer) {
-        var pheromoneMap = phLayer.getPheromoneMap();
-        pheromoneMap.forEach((k, v) -> {
-            if (v > customDiffusionThreshold){
-                getNeighborhood(k).forEach(x -> phLayer.deposit(x, v * diffusionValue));
+        Map<P, Double> pheromoneMap = phLayer.getPheromoneMap();
+        pheromoneMap.forEach((position, value) -> {
+            if (value > customDiffusionThreshold){
+                getNeighborhood(position).forEach(x -> phLayer.deposit(x, value * diffusionValue));
             }
         });
     }

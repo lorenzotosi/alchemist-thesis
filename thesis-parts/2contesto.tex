@@ -17,7 +17,7 @@ all'interno del simulatore \textbf{Alchemist}.
     \includegraphics[width=0.2\textwidth]{figures/net.png}
 \end{wrapfigure}
 
-NetLogo\footnote{\url{https://ccl.northwestern.edu/netlogo/}}\space\cite{wilensky1997netlogo} è un ambiente di programmazione e simulazione open-source
+NetLogo\footnote{\url{https://ccl.northwestern.edu/netlogo/}}\space\cite{wilensky1997netlogo} è un ambiente di programmazione e simulazione \textit{open-source}
 progettato per eseguire simulazioni di modelli complessi e dinamici. È stato sviluppato da Uri Wilensky
 e collaboratori presso il Center for Connected Learning and Computer-Based Modeling presso la Northwestern University.
 Il linguaggio di programmazione di NetLogo è molto semplice e permette di scrivere codice in modo
@@ -49,7 +49,7 @@ ovvero le \textit{patch} e le \textit{tartarughe}.
 Quest'ultime si muovono in uno spazio a griglia e durante il loro movimento rilasciano una particolare molecola
 chiamata ``feromone'' che si deposita in una posizione precisa. L'intero mondo è quindi suddiviso
 in tantissime ``micro-aree'' chiamate \textit{patches}\space\cref{fig:patch}. La \textit{tartaruga} per muoversi 
-``annusa'' davanti a sè, ovvero percepisce se nelle \textit{patches} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
+``annusa'' davanti a sé, ovvero percepisce se nelle \textit{patches} vicine è presente del ``feromone''. Se il valore di quest'ultimo è abbastanza alto, la 
 \textit{tartaruga} si sposterà nella posizione ``annusata'', mentre, in caso contrario, la \textit{tartaruga} si muoverà in modo randomico nello spazio circostante. 
 Contemporaneamente questo procedimento, le \textit{patches} diffonderanno il ``feromone'' alle posizioni vicine e, con il passare del tempo,
 il ``feromone'' tende ad evaporare (ovvero sparire) dalla griglia.
@@ -99,7 +99,7 @@ Per meta-modello si intende un tipo di paradigma che descrive la struttura, le r
 che i modelli di dati devono seguire all'interno di un sistema. Esso rappresenta in modo astratto i 
 concetti e le relazioni all'interno del dominio di interesse e stabilisce i vincoli e le convenzioni
 che tutti i modelli devono usare. Dunque, tutte le incarnazioni sviluppate presentano le stesse entità
-``base''. Poichè Alchemist è sviluppato partendo da un'ispirazione orientata alla chimica/biochimica,
+``base''. Poiché Alchemist è sviluppato partendo da un'ispirazione orientata alla chimica/biochimica,
 le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
 \begin{itemize}
     \item \textbf{Molecole} (\textit{molecule}): il nome di un dato, concettualmente interpretabile come il nome di una variabile.
@@ -120,7 +120,7 @@ le entità presentano nomi riconducibili a quei mondi. Infatti troviamo:
         \item Una \textit{rate equation}, ovvero una equazione che combina il parametro statico (\textit{rate}) con i valori delle condizioni, restituendo un \textit{instantaneous rate}.
         \item Una distribuzione temporale.
     \end{itemize}
-    \item \textbf{Condizione} (\textit{condition}): una funzione che, dato lo stato attuale del'ambiente (\textit{environment}), restituisce un booleano ed un numero. Se il booleano è falso la reazione non può avvenire. In caso contrario, invece, avviene. Il numero può invece influenzare la velocità della reazione a seconda della reazione e della distribuzione temporale.
+    \item \textbf{Condizione} (\textit{condition}): una funzione che, dato lo stato attuale dell'ambiente (\textit{environment}), restituisce un booleano ed un numero. Se il booleano è falso la reazione non può avvenire. In caso contrario, invece, avviene. Il numero può invece influenzare la velocità della reazione a seconda della reazione e della distribuzione temporale.
     \item \textbf{Azione} (\textit{action}): un cambiamento nell'ambiente.
 \end{itemize}
 \begin{figure}[ht]

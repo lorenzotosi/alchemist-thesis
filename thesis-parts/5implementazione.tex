@@ -4,7 +4,7 @@ La struttura del progetto, organizzato in package, è la seguente:
 \begin{itemize}
     \item \textbf{Layer}: il layer personalizzato della simulazione.
     \item \textbf{Actions}: le azioni della simulazione.
-    \item \textbf{GlobalReactions}: le azioni globali della simulazione.
+    \item \textbf{GlobalReactions}: le reazioni globali della simulazione.
     \item \textbf{NodeProperty}: le proprietà dei nodi della simulazione.
 \end{itemize}
 Per avviare il progetto in Alchemist, è necessario delineare accuratamente i parametri
@@ -35,7 +35,7 @@ Il \texttt{PheromoneLayer} esegue, quindi, un arrotondamento per eccesso o per d
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.3\linewidth]{figures/patch-nodi.png}
-    \caption{Rappresentazione grafica delle \textit{patches} puntiformi. Ogni punto rappresenta una patch,
+    \caption{Rappresentazione grafica delle \textit{patches} puntiformi. Ogni punto rappresenta una \textit{patch},
     mentre i quadratini rappresentano i nodi e la freccia indica su che \textit{patch} il nodo depositerà il feromone. In questo esempio
     startX e startY hanno come valore 0, width e height 1 e step 0.5}\label{fig:patch-nodi}
 \end{figure}
